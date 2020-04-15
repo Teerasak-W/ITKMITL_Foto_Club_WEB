@@ -8,7 +8,16 @@ body {
 }
 
 .extraLarge {
-    font-size: 400% !important;
+    font-size: 350% !important;
+}
+
+.fontLight {
+    font-weight: 200 !important;
+}
+
+.positionRelative{
+    position: relative;
+    margin-top: 3em;
 }
 
 .shadow {
@@ -19,4 +28,9 @@ body {
 
 #brandLogo {
     height: 4vh;
+}
+
+#title {
+    position: relative;
+    top: 10vh;
 }
