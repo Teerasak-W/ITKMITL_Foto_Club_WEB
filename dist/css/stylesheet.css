@@ -1,0 +1,23 @@
+body {
+  background-image: url(/assets/backgroundWave.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+.extraLarge {
+  font-size: 400% !important;
+}
+
+.shadow {
+  -webkit-filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.25));
+  -moz-filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+#brandLogo {
+  height: 4vh;
+}
+/*# sourceMappingURL=stylesheet.css.map */

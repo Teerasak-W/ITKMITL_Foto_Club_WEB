@@ -9,5 +9,6 @@
 @blue           : #3082F2;
 @black          : #414141;
 @grey           : #5D5D5D;
+@textColor      : #ffffff;
 
 @defaultBorderRadius: 0.25rem;
