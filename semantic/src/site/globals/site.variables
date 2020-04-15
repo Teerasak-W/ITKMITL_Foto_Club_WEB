@@ -9,5 +9,13 @@
 @blue           : #3082F2;
 @black          : #414141;
 @grey           : #5D5D5D;
+@textColor      : #ffffff;
 
 @defaultBorderRadius: 0.25rem;
+
+/* In site.variables */
+@tabletBreakpoint : 768px;
+@scrollbarWidth : 17px; /* This is a constant */
+ /* In container.variables */
+@tabletMinimumGutter : (@emSize  * 1); /* require 1em gutter */
+@tabletWidth : @tabletBreakpoint - (@tabletMinimumGutter * 2) - @scrollbarWidth;

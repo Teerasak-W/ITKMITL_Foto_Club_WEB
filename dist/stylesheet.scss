@@ -7,6 +7,19 @@ body {
     overflow-x: hidden;
 }
 
+.extraLarge {
+    font-size: 350% !important;
+}
+
+.fontLight {
+    font-weight: 200 !important;
+}
+
+.positionRelative{
+    position: relative;
+    margin-top: 3em;
+}
+
 .shadow {
     -webkit-filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.25));
     -moz-filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.25));
@@ -15,4 +28,9 @@ body {
 
 #brandLogo {
     height: 4vh;
+}
+
+#title {
+    position: relative;
+    top: 10vh;
 }
