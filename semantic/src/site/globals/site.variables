@@ -1,3 +1,13 @@
-/*******************************
-     User Global Variables
-*******************************/
+/*----------------------
+     Colours Palette
+----------------------*/
+
+@primaryColor   : #FFB529;
+@secondaryColor : #3082F2;
+@red            : #FC3C3C;
+@orange         : #FFB529;
+@blue           : #3082F2;
+@black          : #414141;
+@grey           : #5D5D5D;
+
+@defaultBorderRadius: 0.25rem;
