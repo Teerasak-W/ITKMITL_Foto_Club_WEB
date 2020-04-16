@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+class User_Account(models.Model):
+    user_id = models.OneToOneField(User,on_delete=models.CASCADE)
+    student_id = models.CharField(max_length=8)
+    picture_path = models.URLField(max_length = 500,null = True)
+    audience = models.BooleanField(default=True)
+    member = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
+
 class Equipment(models.Model):
-    type_for = (('Ca', 'camera'),('Le', 'lens'),('Si', 'light'),('Ot', 'other'))
-    equipment_type = models.CharField(max_length=2, choices=type_for)
+    type_for = (('0', 'camera'),('1', 'lens'),('2', 'light'),('3', 'other'))
+    equipment_type = models.CharField(max_length=1, choices=type_for)
     equipment_detail = models.TextField()
     equipment_title = models.CharField(max_length=50)
 
