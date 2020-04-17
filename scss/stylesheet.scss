@@ -5,15 +5,17 @@ html {
   background-position: center top;
   // background-attachment: fixed;
   background-size: cover;
+  height: 100%;
 }
 
 @media only screen and (max-width: 768px) {
+
   body,
   html {
     background-repeat: no-repeat;
     background-position: center top;
     background-attachment: scroll;
-    background-size: 140vh;
+    background-size: cover;
   }
 }
 
@@ -23,7 +25,9 @@ html {
 }
 
 #mountainBackground {
+  z-index: 0;
   position: absolute;
+  bottom: 0;
 }
 
 #bottomBar {
@@ -34,6 +38,10 @@ html {
 
 $theme-colors: ("primary": #FFB529,
   "secondary": #3082F2);
+
+.non-scrollable {
+  overflow: hidden;
+}
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/bootstrap/scss/functions";

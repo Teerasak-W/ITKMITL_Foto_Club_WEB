@@ -4,6 +4,7 @@ html {
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
+  height: 100%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -12,7 +13,7 @@ html {
     background-repeat: no-repeat;
     background-position: center top;
     background-attachment: scroll;
-    background-size: 140vh;
+    background-size: cover;
   }
 }
 
@@ -22,7 +23,9 @@ html {
 }
 
 #mountainBackground {
+  z-index: 0;
   position: absolute;
+  bottom: 0;
 }
 
 #bottomBar {
@@ -31,6 +34,10 @@ html {
           transform: scaleX(-1);
   -webkit-transform: scaleY(-1);
           transform: scaleY(-1);
+}
+
+.non-scrollable {
+  overflow: hidden;
 }
 
 /*!
