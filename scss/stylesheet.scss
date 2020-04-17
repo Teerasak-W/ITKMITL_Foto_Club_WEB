@@ -1,24 +1,24 @@
 body {
   background-image: url(/assets/backgroundWave.svg);
   background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
+  background-position: center top;
+  // background-attachment: fixed;
+  background-size: inherit;
   height: 200vh;
 }
 
 @media only screen and (max-width: 768px) {
   body {
     background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: 70vh;
+    background-position: center top;
+    background-attachment: scroll;
+    background-size: 140vh;
   }
 }
 
-.pictureShadow {
-  -webkit-filter: drop-shadow(5px 5px 5px #222);
-  filter: drop-shadow(5px 5px 5px #222);
+.multiShadow {
+  -webkit-filter: drop-shadow(0.1em 0.1em 0.1em rgba(34, 34, 34, 0.5));
+  filter: drop-shadow(0.1em 0.1em 0.1em rgba(34, 34, 34, 0.5));
 }
 
 #mountainBackground {
