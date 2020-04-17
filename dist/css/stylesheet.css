@@ -1,13 +1,14 @@
-body {
+body,
+html {
   background-image: url(/assets/backgroundWave.svg);
   background-repeat: no-repeat;
   background-position: center top;
-  background-size: inherit;
-  height: 200vh;
+  background-size: cover;
 }
 
 @media only screen and (max-width: 768px) {
-  body {
+  body,
+  html {
     background-repeat: no-repeat;
     background-position: center top;
     background-attachment: scroll;
@@ -21,8 +22,15 @@ body {
 }
 
 #mountainBackground {
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+}
+
+#bottomBar {
+  position: absolute;
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+  -webkit-transform: scaleY(-1);
+          transform: scaleY(-1);
 }
 
 /*!
