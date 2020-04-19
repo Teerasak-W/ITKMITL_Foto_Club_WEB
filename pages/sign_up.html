@@ -13,13 +13,13 @@
 <body class="non-scrollable">
   <div class="container-fluid backHome position-md-fixed position-relative h-md-25">
     <div class="row w-100 px-3 py-3">
-      <input onclick="goBack()" type="image" src="/assets/arrow-circle-left.svg" class="multiShadow" height="50"/>
+      <input onclick="goBack()" type="image" src="/assets/arrow-circle-left.svg" class="multiShadow" height="50" />
     </div>
   </div>
   <!-- Mountain -->
   <img src="/assets/mountainBackground.svg" alt="" id="mountainBackground">
   <!-- End Mountain -->
-  <div class="container h-75 h-md-100">
+  <div class="container h-75 h-md-100 scrollable">
     <div class="row h-100">
       <div class="col-md-6 col-12 my-auto mx-auto">
         <div class="card px-0 py-0 border-0">
@@ -33,7 +33,8 @@
                   <input type="text" placeholder="Username"
                     class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
                     tabindex="1" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <small id="usernameHelp" class="form-text text-right text-danger ml-auto">Err msg.</small>
+                  <small id="usernameHelp" class="form-text text-right text-danger ml-auto">Err
+                    msg.</small>
                 </div>
               </div>
               <div class="form-group row justify-content-center">
@@ -41,22 +42,13 @@
                   <input type="password" placeholder="Password"
                     class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
                     tabindex="2" id="exampleInputPassword1">
-                  <small id="passwordlHelp" class="form-text text-right text-danger ml-auto">Err msg.</small>
+                  <small id="passwordlHelp" class="form-text text-right text-danger ml-auto">Err
+                    msg.</small>
                 </div>
               </div>
               <div class="row justify-content-center mt-4">
                 <div class="col-10">
-                  <button type="submit" class="btn btn-lg btn-primary text-white w-100" tabindex="3">Sign in</button>
-                </div>
-                <div class="col-10 text-center mt-3">
-                  <a href="/pages/password_recovery.html" class="text-muted mt-5 font-weight-light"><em>Forget Password
-                      ?</em></a>
-                </div>
-                <div class="col-10 text-center mt-3">
-                  <a href="/pages/sign_up.html">
-                    <button class="btn btn-outline-light text-muted w-100">
-                      <em class="font-weight-light">Need an account ?</em> Sign up</button>
-                  </a>
+                  <button type="submit" class="btn btn-lg btn-primary text-white w-100" tabindex="3">Submit</button>
                 </div>
               </div>
             </form>

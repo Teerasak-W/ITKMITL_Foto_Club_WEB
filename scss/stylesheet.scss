@@ -50,6 +50,10 @@ $theme-colors: ("primary": #FFB529,
   overflow: hidden;
 }
 
+.scrollable {
+  overflow-x: scroll;
+}
+
 form {
   ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -66,6 +70,10 @@ form {
   ::-ms-input-placeholder {
     /* Microsoft Edge */
     color: rgb(165, 165, 165) !important;
+  }
+
+  input{
+    font-weight: 300 !important;
   }
 }
 
