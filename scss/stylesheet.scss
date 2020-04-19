@@ -24,6 +24,12 @@ html {
   filter: drop-shadow(0.1em 0.1em 0.1em rgba(34, 34, 34, 0.5));
 }
 
+.backHome{
+  position: fixed;
+  z-index: 0;
+  top: 0;
+}
+
 #mountainBackground {
   z-index: 0;
   position: absolute;
@@ -37,10 +43,30 @@ html {
 }
 
 $theme-colors: ("primary": #FFB529,
-  "secondary": #3082F2);
+  "secondary": #3082F2,
+  "light": rgb(165, 165, 165));
 
 .non-scrollable {
   overflow: hidden;
+}
+
+form {
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(165, 165, 165) !important;
+    opacity: 1;
+    /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgb(165, 165, 165) !important;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgb(165, 165, 165) !important;
+  }
 }
 
 @import "../node_modules/bootstrap/scss/bootstrap";
