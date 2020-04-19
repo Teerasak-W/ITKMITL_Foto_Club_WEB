@@ -4,7 +4,7 @@ html {
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
-  height: 100%;
+  min-height: 100%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -28,9 +28,22 @@ html {
   top: 0;
 }
 
+#imageUpload {
+  display: none;
+}
+
+#profileImage {
+  cursor: pointer;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 7.5em;
+  height: 7.5em;
+  border-width: .25em !important;
+}
+
 #mountainBackground {
-  z-index: 0;
-  position: absolute;
+  z-index: 200;
+  position: fixed;
   bottom: 0;
 }
 

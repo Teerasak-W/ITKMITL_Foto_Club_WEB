@@ -5,7 +5,7 @@ html {
   background-position: center top;
   // background-attachment: fixed;
   background-size: cover;
-  height: 100%;
+  min-height: 100%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -24,15 +24,27 @@ html {
   filter: drop-shadow(0.1em 0.1em 0.1em rgba(34, 34, 34, 0.5));
 }
 
-.backHome{
+.backHome {
   position: fixed;
   z-index: 900;
   top: 0;
 }
 
+#imageUpload {
+  display: none;
+}
+
+#profileImage {
+  cursor: pointer;
+  object-fit: cover;
+  width: 7.5em;
+  height: 7.5em;
+  border-width: .25em !important;
+}
+
 #mountainBackground {
-  z-index: 0;
-  position: absolute;
+  z-index: 200;
+  position: fixed;
   bottom: 0;
 }
 
@@ -72,7 +84,7 @@ form {
     color: rgb(165, 165, 165) !important;
   }
 
-  input{
+  input {
     font-weight: 300 !important;
   }
 }
