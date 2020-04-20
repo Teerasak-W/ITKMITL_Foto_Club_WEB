@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<!-- content -->
+<div class="container-fluid backHome position-md-fixed position-relative h-md-25">
+  <div class="row w-100 px-3 py-3">
+    <input onclick="goBack()" type="image" src="{% static '/assets/arrow-circle-left.svg' %}" class="multiShadow" height="50" />
+  </div>
+</div>
+<!-- Mountain -->
+<img class="position-fixed" src="{% static '/assets/mountainBackground.svg' %}" alt="" id="mountainBackground">
+<!-- End Mountain -->
+<div class="container h-auto mb-5">
+  <div class="row h-100">
+    <div class="col-md-6 col-12 my-auto mx-auto">
+      <div class="card px-0 py-0 border-0">
+        <div class="py-3 text-center bg-primary font-weight-bold text-white rounded-top">
+          <img src="{% static '/assets/logoHeader.png' %}" height="60" alt="">
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <!-- <div class="col-12 mt-2 justify-content-center text-center mb-4">
+              <div class="img-thumbnail w-100 border-0">
+                <img src="{% static '/assets/avatarMock.png' %}" id="profileImage" class="rounded-circle mx-auto d-block border" />
+              </div>
+              <small class="text-muted">Upload your profile picture.</small>
+              <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+            </div> -->
+            {% for field in form %}
+              <p>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                  <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
+              </p>
+            {% endfor %}
+            <button type="submit" class="btn btn-lg btn-primary text-white w-100" tabindex="3">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+<script>
+  $("#profileImage").click(function (e) {
+    $("#imageUpload").click();
+  });
+
+  function fasterPreview(uploader) {
+    if (uploader.files && uploader.files[0]) {
+      $('#profileImage').attr('src',
+        window.URL.createObjectURL(uploader.files[0]));
+    }
+  }
+
+  $("#imageUpload").change(function () {
+    fasterPreview(this);
+  });
+</script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+{% endblock content %}
