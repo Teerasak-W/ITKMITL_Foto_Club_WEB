@@ -29,4 +29,6 @@ class Date_time(models.Model):
     finish_time = models.DateTimeField(auto_now=True)
     activity_id = models.ForeignKey(Activities, on_delete=models.CASCADE)
 
+
+
     

@@ -12,3 +12,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 def index(request):
     user_view = request.user
     return render(request, 'index.html', context={'user_view': user_view,})
+
+def createSuggestion(request):
+    #if request.method == "POST":
+    return render(request, 'suggestion.html')
