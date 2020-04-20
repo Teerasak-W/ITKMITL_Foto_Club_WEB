@@ -9,12 +9,13 @@ from activities import views
 
 
 # Create your views here.
-def my_login(request):
+def my_sign_in(request):
     context = {}
 
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        print(username, password)
 
         user = authenticate(request, username=username, password=password)
 
@@ -26,7 +27,7 @@ def my_login(request):
             context['password'] = password
             context['error'] = 'Wrong username or password!'
 
-    return render(request, template_name='login.html', context=context)
+    return render(request, template_name='sign_in.html', context=context)
 
 def my_logout(request):
     logout(request)

@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', actv.index),
     path('index/', actv.index),
-
+    path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),
 ]
