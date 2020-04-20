@@ -1,0 +1,95 @@
+body,
+html {
+  background-image: url(/assets/backgroundWave.svg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  // background-attachment: fixed;
+  background-size: cover;
+  min-height: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+
+  body,
+  html {
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
+.multiShadow {
+  -webkit-filter: drop-shadow(0.1em 0.1em 0.1em rgba(34, 34, 34, 0.5));
+  filter: drop-shadow(0.1em 0.1em 0.1em rgba(34, 34, 34, 0.5));
+}
+
+.backHome {
+  position: fixed;
+  z-index: 900;
+  top: 0;
+}
+
+#imageUpload {
+  display: none;
+}
+
+#profileImage {
+  cursor: pointer;
+  object-fit: cover;
+  width: 7.5em;
+  height: 7.5em;
+  border-width: .25em !important;
+}
+
+#mountainBackground {
+  z-index: 0;
+  position: fixed;
+  bottom: 0;
+}
+
+#bottomBar {
+  position: absolute;
+  transform: scaleX(-1);
+  transform: scaleY(-1);
+}
+
+$theme-colors: ("primary": #FFB529,
+  "secondary": #3082F2,
+  "light": rgb(165, 165, 165));
+
+.non-scrollable {
+  overflow: hidden;
+}
+
+.scrollable {
+  overflow-x: scroll;
+}
+
+form {
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(165, 165, 165) !important;
+    opacity: 1;
+    /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgb(165, 165, 165) !important;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgb(165, 165, 165) !important;
+  }
+
+  input {
+    font-weight: 300 !important;
+  }
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";

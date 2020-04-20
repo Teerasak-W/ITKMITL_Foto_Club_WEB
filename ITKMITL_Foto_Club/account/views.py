@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from activities import views
 
 
 # Create your views here.
@@ -19,7 +20,7 @@ def my_login(request):
 
         if user:
             login(request, user)
-            return redirect('index')
+            return redirect('/index/')
         else:
             context['username'] = username
             context['password'] = password
@@ -29,5 +30,5 @@ def my_login(request):
 
 def my_logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('/index/')
 

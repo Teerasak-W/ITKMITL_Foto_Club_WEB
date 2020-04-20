@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from activities import views as actv
+from account import views as accv
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', actv.index),
+    path('index/', actv.index),
+
+    path('logout/', accv.my_logout, name='logout'),
 ]

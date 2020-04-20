@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT FOTO CLUB</title>
+  <link rel="shortcut icon" href="{% static '/assets/fotoLogo.png' %}" />
+  <link rel="stylesheet" href="{% static '/dist/css/stylesheet.css' %}">
+  <style>
+      body,html {
+        background-image: url("{% static '/assets/backgroundWave.svg' %}");
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: cover;
+        min-height: 100%;
+        }
+    @media only screen and (max-width: 768px) {
+    body,html {
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-attachment: scroll;
+        background-size: cover;
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="container-fluid px-0">
+    <nav class="navbar navbar-transparent sticky-top px-3">
+      <a class="navbar-brand mr-auto" href="#">
+        <img src="{% static '/assets/fotoBrand.png' %}" class="multiShadow" height="40" alt="IT FOTO Club Logo">
+      </a>
+      {% if user.is_authenticated %}
+      <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>
+      {% else %}
+      <a href="/pages/sign_in.html"
+        class="text-center text-white font-weight-normal text-decoration-none mx-2 px-3 multiShadow">Sign in</a>
+      <a role="button" href="/pages/sign_up.html" class="btn btn-primary multiShadow text-white">Sign up</a>
+      {% endif %}
+    </nav>
+  </div>
+  <!-- Navigation Bar -->
+  <div class="container">
+  {% block content %}
+  {% endblock %}
+  </div>>
+  <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">
+      {% block footer %}
+      {% endblock %}
+      </span>
+    </div>
+  </footer>
+  
+</body>
+</html>
