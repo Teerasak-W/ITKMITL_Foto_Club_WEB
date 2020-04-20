@@ -41,6 +41,12 @@ html {
   border-width: .25em !important;
 }
 
+#pictureMock {
+  cursor: pointer;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
+
 #mountainBackground {
   z-index: 0;
   position: fixed;
