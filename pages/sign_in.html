@@ -6,20 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IT FOTO CLUB</title>
   <link rel="shortcut icon" href="/assets/fotoLogo.png" />
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/dist/css/stylesheet.css">
 </head>
 
 <body class="non-scrollable">
-  <div class="container-fluid backHome position-md-fixed position-relative h-md-25">
+  <div class="container-fluid backHome position-sm-fixed position-relative">
     <div class="row w-100 px-3 py-3">
-      <input onclick="goBack()" type="image" src="/assets/arrow-circle-left.svg" class="multiShadow" height="50"/>
+      <input onclick="goBack()" type="image" src="/assets/arrow-circle-left.svg" class="multiShadow" height="50" />
     </div>
   </div>
   <!-- Mountain -->
   <img src="/assets/mountainBackground.svg" alt="" id="mountainBackground">
   <!-- End Mountain -->
-  <div class="container h-75 h-md-100">
+  <div class="container h-75 h-sm-100">
     <div class="row h-100">
       <div class="col-md-6 col-12 my-auto mx-auto">
         <div class="card px-0 py-0 border-0">
@@ -51,9 +50,8 @@
                       ?</em></a>
                 </div>
                 <div class="col-10 text-center mt-3">
-                  <a href="/pages/sign_up.html">
-                    <button class="btn btn-outline-light text-muted w-100">
-                      <em class="font-weight-light">Need an account ?</em> Sign up</button>
+                  <a class="btn btn-outline-light text-muted w-100 py-2" role="button" href="/pages/sign_up.html">
+                    <em class="font-weight-light">Need an account ?</em> Sign up
                   </a>
                 </div>
               </div>
@@ -68,8 +66,8 @@
       window.history.back();
     }
   </script>
-  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/jquery/dist/jquery.min.js"></script>
+  <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

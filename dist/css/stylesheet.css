@@ -57,6 +57,7 @@ html {
 
 .non-scrollable {
   overflow: hidden;
+  height: 100vh;
 }
 
 .scrollable {

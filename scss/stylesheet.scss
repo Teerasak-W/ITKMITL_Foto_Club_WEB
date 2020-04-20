@@ -60,6 +60,7 @@ $theme-colors: ("primary": #FFB529,
 
 .non-scrollable {
   overflow: hidden;
+  height: 100vh;
 }
 
 .scrollable {
@@ -89,7 +90,7 @@ form {
   }
 }
 
-@import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+@import "../bootstrap/scss/bootstrap";
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/mixins";
