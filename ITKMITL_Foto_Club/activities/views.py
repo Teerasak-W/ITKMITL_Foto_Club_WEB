@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
+from account.models import Request
 from .models import Activities
-from .forms import Create_Activities
+from .forms import Create_Activities, Request_Activities
 
 # Create your views here.
 
@@ -52,3 +53,28 @@ def create_activities(request):
         form = Create_Activities()
         print(form)
     return render(request, 'create_activities.html', {'form': form})
+
+def request_activities(request):
+    if request.method == 'POST':
+        form = Request_Activities(request.POST)
+        if form.is_valid():
+            request_activities = Request.objects.create(
+                request_title = request.POST.get('request_title'),
+                location = request.POST.get('location'),
+                picture_path = request.POST.get('picture_path'),
+                detail = request.POST.get('detail'),
+            )
+            print(request_activities)
+            if request_activities:
+                return redirect('/index/')
+    else:
+        form = Request_Activities()
+        print(form)
+    return render(request, 'request_activities.html', {'form': form})
+
+def view_request(request):
+    v_request = Request.objects.all()
+    # print(activities)
+    return render(request, 'view_request.html', context={'v_request': v_request})
+
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    <div class="center">
+      {% for a in v_request %}
+      <div class="col-md-3 my-2">
+      <div class="card multiShadow">
+          <div class="card-body text-grey">
+          <div class="card-title font-weight-bold">{{ a.id }} {{ a.request_title }}</div>
+          <p class="card-text">{{ a.location }}</p>
+          </div>
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+{% endblock content %}

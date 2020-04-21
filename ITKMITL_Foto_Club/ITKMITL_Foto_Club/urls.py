@@ -26,6 +26,8 @@ urlpatterns = [
     path('index/', actv.index),
     path('activities/', actv.view_activities, name='activities'),
     path('create_activities/', actv.create_activities, name='create_activities'),
+    path('request_activities/', actv.request_activities, name='request_activities'),
+    path('view_request/', actv.view_request, name='view_request'),
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),
