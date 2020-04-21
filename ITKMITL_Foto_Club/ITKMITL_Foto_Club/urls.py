@@ -21,8 +21,12 @@ from account import views as accv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', actv.index),
     path('index/', actv.index),
+    path('activities/', actv.view_activities, name='activities'),
+    path('create_activities/', actv.create_activities, name='create_activities'),
+
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),
     path('sign_up/', accv.my_sign_up, name='sign_up'),
