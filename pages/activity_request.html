@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IT FOTO CLUB</title>
   <link rel="shortcut icon" href="/assets/fotoLogo.png" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="/dist/css/stylesheet.css">
 </head>
 
@@ -35,53 +37,40 @@
                   <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
                 </div>
                 <div class="col-10">
-                  <input type="text" placeholder="Username"
+                  <input type="text" placeholder="Activity Title"
                     class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="1" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <small id="usernameHelp" class="form-text text-right text-danger ml-auto">Err
+                    tabindex="1" id="exampleInputActivityTitle" aria-describedby="emailHelp">
+                  <small id="activityTitleHelp" class="form-text text-right text-danger ml-auto">Err
                     msg.</small>
                 </div>
                 <div class="col-10 mt-2">
-                  <input type="email" placeholder="Email"
+                  <input type="text" placeholder="Location"
                     class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="2" id="exampleInputEmail">
-                  <small id="emailHelp" class="form-text text-right text-danger ml-auto">Err
+                    tabindex="2" id="exampleInputLocation">
+                  <small id="locationHelp" class="form-text text-right text-danger ml-auto">Err
                     msg.</small>
                 </div>
-                <div class="col-10 mt-2">
-                  <input type="text" placeholder="Student ID"
-                    class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="3" id="exampleInputSID">
-                  <small id="SIDHelp" class="form-text text-right text-danger ml-auto">Err
-                    msg.</small>
-                </div>
-                <div class="col-10 mt-2">
-                  <input type="password" placeholder="Password"
-                    class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="4" id="exampleInputPassword">
-                  <small id="passwordHelp" class="form-text text-right text-danger ml-auto">Err
-                    msg.</small>
-                </div>
-                <div class="col-10 mt-2">
-                  <input type="password" placeholder="Confirm Password"
-                    class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="4" id="exampleInputPassword2">
-                  <small id="password2Help" class="form-text text-right text-danger ml-auto">Err
-                    msg.</small>
-                </div>
-                <div class="col-10 col-sm-5 mt-2">
-                  <input type="text" placeholder="Firstname"
-                    class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="4" id="exampleInputfname">
-                  <small id="fnameHelp" class="form-text text-right text-danger ml-auto">Err
-                    msg.</small>
-                </div>
-                <div class="col-10 col-sm-5 mt-2">
-                  <input type="text" placeholder="Lastname"
-                    class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0"
-                    tabindex="5" id="exampleInputlname">
-                  <small id="lnameHelp" class="form-text text-right text-danger ml-auto">Err
-                    msg.</small>
+              </div>
+              <div class="form-group row justify-content-center">
+                <div class="col-10">
+                  <label for="" class="h5 font-weight-light mb-3 text-muted">Select Datetime</label>
+                  <div class="input-group dat mb-3">
+                    <input type="datetime" name="title[]" class="form-control m-input text-center" placeholder="Start"
+                      autocomplete="off">
+                    <div class='input-group date' id='datetimepicker1'>
+                      <input type='text' class="form-control" />
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                    <input type="datetime" name="title[]" class="form-control m-input text-center" placeholder="Finish"
+                      autocomplete="off">
+                    <div class="input-group-append">
+                      <button id="removeRow" type="button" class="btn btn-danger disabled">Remove</button>
+                    </div>
+                  </div>
+                  <div id="newRow"></div>
+                  <button id="addRow" type="button" class="btn btn-info">Add Row</button>
                 </div>
               </div>
               <div class="row justify-content-center mt-4">
@@ -95,7 +84,17 @@
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
+  </script>
   <script src="/jquery/dist/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+  </script>
   <script>
     function goBack() {
       window.history.back();
@@ -117,6 +116,7 @@
       fasterPreview(this);
     });
   </script>
+  <script src="/dist/js/dynamicForm.js"></script>
   <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
