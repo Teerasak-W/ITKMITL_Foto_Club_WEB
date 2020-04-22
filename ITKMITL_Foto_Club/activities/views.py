@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from account.models import Request
-from .models import Activities
-from .forms import Create_Activities, Request_Activities
+from .models import Activities, Date_time, Contact
+from .forms import Create_Activities, Request_Activities, Request_Datetime, Request_Contact
 
 # Create your views here.
 
@@ -56,21 +56,43 @@ def create_activities(request):
 
 def request_activities(request):
     if request.method == 'POST':
-        form = Request_Activities(request.POST)
-        if form.is_valid():
+        form_RA = Request_Activities(request.POST)
+        if form_RA.is_valid():
             request_activities = Request.objects.create(
                 request_title = request.POST.get('request_title'),
                 location = request.POST.get('location'),
                 picture_path = request.POST.get('picture_path'),
                 detail = request.POST.get('detail'),
             )
-            print(request_activities)
-            if request_activities:
-                return redirect('/index/')
+        if request_activities:
+            return render(request, 'request_add.html', context={'id': request_activities.id,})
+
     else:
-        form = Request_Activities()
-        print(form)
-    return render(request, 'request_activities.html', {'form': form})
+        form_RA = Request_Activities()
+    return render(request, 'request_activities.html', context={'form_RA': form_RA,})
+
+def request_add(request,id):
+    # if request.method == 'POST':
+        form_DT = Request_Datetime(request.POST)
+        form_CT = Request_Contact(request.POST)
+        if form_DT.is_valid():
+            request_datetime = Date_time.objects.create(
+                start_time = request.POST.get('start_time'),
+                finish_time = request.POST.get('finish_time'),
+                activity_id = id,
+            )
+        if form_CT.is_valid():
+            request_contact = Contact.objects.create(
+                contact_person = request.POST.get('contact_person'),
+                contact_number = request.POST.get('contact_number'),
+                activity_id = id,
+            )
+        if request_activities:
+            return redirect('/index/')
+    # else:
+    #     form_DT = Request_Datetime()
+    #     form_CT = Request_Contact()
+    # return render(request, 'request_add.html', {'form_DT':form_DT, 'form_CT':form_CT})
 
 def view_request(request):
     v_request = Request.objects.all()

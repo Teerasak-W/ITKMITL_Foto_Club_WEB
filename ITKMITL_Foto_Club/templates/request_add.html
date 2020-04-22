@@ -4,7 +4,19 @@
     <div class="center">
         <form method="post">
         {% csrf_token %}
-        {% for field in form_RA %}
+        {% for field in form_DT %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+              <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        {% for field in form_CT %}
         <p>
             {{ field.label_tag }}<br>
             {{ field }}
