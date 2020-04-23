@@ -27,11 +27,12 @@ urlpatterns = [
     path('activities/', actv.view_activities, name='activities'),
     path('create_activities/', actv.create_activities, name='create_activities'),
     path('request_activities/', actv.request_activities, name='request_activities'),
-    path('request_add/<int:id>', actv.request_add, name='request_add'),
     path('view_request/', actv.view_request, name='view_request'),
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),
     path('sign_up/', accv.my_sign_up, name='sign_up'),
+    path('view_audience/', accv.views_audience, name='view_audience'),
+    path('add_member/<int:id>/', accv.add_member, name='add_member'),
     path('suggestion/', actv.createSuggestion, name='suggestion'),
 ]

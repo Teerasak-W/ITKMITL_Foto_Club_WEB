@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
-from account.models import Request
+from account.models import Request, User_Account
 from .models import Activities, Date_time, Contact
 from .forms import Create_Activities, Request_Activities, Request_Datetime, Request_Contact
 
@@ -63,16 +63,17 @@ def request_activities(request):
                 location = request.POST.get('location'),
                 picture_path = request.POST.get('picture_path'),
                 detail = request.POST.get('detail'),
+                user_id = request.user,
             )
         if request_activities:
-            return render(request, 'request_add.html', context={'id': request_activities.id,})
+            return redirect('/index/')
 
     else:
         form_RA = Request_Activities()
     return render(request, 'request_activities.html', context={'form_RA': form_RA,})
 
 def request_add(request,id):
-    # if request.method == 'POST':
+    if request.method == 'POST':
         form_DT = Request_Datetime(request.POST)
         form_CT = Request_Contact(request.POST)
         if form_DT.is_valid():
@@ -89,14 +90,16 @@ def request_add(request,id):
             )
         if request_activities:
             return redirect('/index/')
-    # else:
-    #     form_DT = Request_Datetime()
-    #     form_CT = Request_Contact()
-    # return render(request, 'request_add.html', {'form_DT':form_DT, 'form_CT':form_CT})
+    else:
+        form_DT = Request_Datetime()
+        form_CT = Request_Contact()
+    return render(request, 'request_add.html', {'form_DT':form_DT, 'form_CT':form_CT})
 
 def view_request(request):
     v_request = Request.objects.all()
-    # print(activities)
-    return render(request, 'view_request.html', context={'v_request': v_request})
+    u_request = User_Account(user_id = request.user)
+    print(u_request.audience)
+    print(u_request.member)
+    return render(request, 'view_request.html', context={'v_request': v_request,'u_request':u_request})
 
 

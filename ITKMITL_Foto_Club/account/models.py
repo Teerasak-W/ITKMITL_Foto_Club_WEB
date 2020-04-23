@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 class User_Account(models.Model):
-    user_id = models.OneToOneField(User,on_delete=models.CASCADE)
+    user_id = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,)
     student_id = models.CharField(max_length=8)
     picture_path = models.URLField(max_length = 500,null = True)
     audience = models.BooleanField(default=True)
@@ -21,12 +21,16 @@ class Request(models.Model):
     picture_path = models.URLField(max_length = 500,null = True) 
     detail = models.TextField()
     request_status = models.BooleanField(default=False)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class activity_contact(models.Model):
+
+class Request_contact(models.Model):
+    request_id = models.ForeignKey(Request, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     number = models.CharField(max_length=10)
 
-class Request_Date_time(models.Model):
+class Request_Datetime(models.Model):
+    request_id = models.ForeignKey(Request, on_delete=models.CASCADE)
     start_time = models.DateTimeField(auto_now=True)
     finish_time = models.DateTimeField(auto_now=True)
 

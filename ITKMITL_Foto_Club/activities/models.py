@@ -25,9 +25,9 @@ class Contact(models.Model):
     contact_number = models.CharField(max_length=10)
 
 class Date_time(models.Model):
+    activity_id = models.ForeignKey(Activities, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField()
-    activity_id = models.ForeignKey(Activities, on_delete=models.CASCADE)
 
 
 

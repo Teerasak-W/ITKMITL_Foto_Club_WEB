@@ -40,7 +40,7 @@ def my_sign_up(request):
             login(request, user)
             user_account = User_Account.objects.create(
                 user_id = request.user,
-                student_id = form.cleaned_data.get('student_id'),
+                student_id = request.POST.get('student_id'),
             )
             return redirect('/index/')
     else:
@@ -50,4 +50,19 @@ def my_sign_up(request):
 def my_logout(request):
     logout(request)
     return redirect('/index/')
+
+def views_audience(request):
+    p_request = User_Account.objects.all()
+    return render(request, 'view_audience.html', context={'p_request':p_request})
+
+def add_member(requset,id):
+    add_to = User_Account.objects.get(pk=id)
+    print(add_to.member)
+    add_to.member = True
+    print(add_to.member)
+    add_to.save()
+    if add_to.member == True:
+        return redirect('/index/')
+    return render(request, 'view_post.html', context={})
+    
 

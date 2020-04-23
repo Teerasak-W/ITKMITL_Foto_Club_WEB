@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="center">
+  <div class="row px-3">
+  {% for a in p_request %}
+  <div class="col-md-3 my-2">
+  <div class="card multiShadow">
+      <div class="card-body text-grey">
+      <div class="card-title font-weight-bold">{{ a.user_id }}</div>
+      <p class="card-text">{{ a.student_id }}</p>
+      <p class="card-text">{{ a.user_id.first_name }}</p>
+      <p class="card-text">{{ a.user_id.last_name }}</p>
+      {% if a.audience == True and a.member == False %}
+        <a role="button" href="{% url 'add_member' id=a.user_id.id %}" class="btn btn-primary multiShadow text-white">Add Member</a>
+      {% endif %}
+      </div>
+  </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+{% endblock content %}
