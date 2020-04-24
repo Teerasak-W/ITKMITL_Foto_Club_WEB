@@ -8,14 +8,47 @@
       <div class="card multiShadow">
           <div class="card-body text-grey">
           <div class="card-title font-weight-bold">{{ a.id }} {{ a.request_title }}</div>
+          {% if a.request_status %}
+          <p class="btn btn-success multiShadow text-white">Approved</p>
+          {% else %}
+          <p class="btn btn-warning multiShadow text-white">Checking</p>
+          {% endif %}
           <p class="card-text">{{ a.location }}</p>
           <p class="card-text">{{ a.user_id }}</p>
-          {% if a.user_id.id == u_request.user_id.id %}
-            <a role="button" href="" class="btn btn-primary multiShadow text-white">Add Time</a>
-            <a role="button" href="" class="btn btn-primary multiShadow text-white">Add Contact</a>
+          <p class="card-text">{{ a.detail }}</p>
+          <div class="card-title font-weight-bold">Date Time</div>
+          {% for t in t_request %}
+            {% if t.ar_id.id == a.id %}
+              <p class="card-text">{{ t.start_time }}
+                <br>{{ t.finish_time }}</p>
+            {% endif %}
+          {% endfor %}
+
+          <div class="card-title font-weight-bold">Contact</div>
+          {% for c in c_request %}
+            {% if c.ar_id.id == a.id %}
+              <p class="card-text">{{ c.name }} ({{ c.number }}) </p>
+            {% endif %}
+          {% endfor %}
+
+          <div class="card-title font-weight-bold">Staff</div>
+          {% for s in s_request %}
+            {% if s.activity_id.id == a.id %}
+              <p class="card-text">{{ s.staff_id.first_name }} {{ s.staff_id.last_name }}</p>
+            {% endif %}
+          {% endfor %}
+
+          {% if a.user_id.id == u_request.user_id.id and a.request_status != True %}
+            <a role="button" href="{% url 'add_time' id=a.id %}" class="btn btn-primary multiShadow text-white">Add Time</a>
+            <a role="button" href="{% url 'add_contact' id=a.id %}" class="btn btn-primary multiShadow text-white">Add Contact</a>
           {% endif %}
-          {% if u_request.member == True %}
-            <a role="button" href="" class="btn btn-primary multiShadow text-white">Assist To Staff</a>
+          {% if u_request.member and a.request_status != True %}
+            <a role="button" href="{% url 'add_staff' id=a.id %}" class="btn btn-primary multiShadow text-white">Assist To Staff</a>
+          {% endif %}
+          {% if request.user.is_superuser or u_request.admin %}
+            {% if a.request_status != True %}
+              <a role="button" href="{% url 'create_activities' id=a.id %}" class="btn btn-primary multiShadow text-white">Create_activities</a>
+            {% endif %}
           {% endif %}
           </div>
       </div>

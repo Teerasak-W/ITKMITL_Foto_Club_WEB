@@ -2,7 +2,20 @@
 {% block content %}
 {% load static %}
     <div class="center">
-        <h1>{{ activities.activity_title }}</h1>
-        <h2>{{ activities.location }}</h2>
-    </div>
+        <div class="row px-3">
+        <div class="col">
+        <div class="card multiShadow">
+            <div class="card-body text-grey">
+            <div class="card-title font-weight-bold">Activities : {{ activities.activity_title }}</div>
+            <p class="card-text">location : {{ activities.location }}</p>
+            <div class="card-title font-weight-bold">Staff</div>
+            {% for s in staff %}
+                <p class="card-text">{{ s.staff_id.first_name }} {{ s.staff_id.last_name }}</p>
+            {% endfor %}
+            <!-- {% for a in album %}
+                <p class="card-text"></p>
+            {% endfor %} -->
+            </div>
+        </div>
+        </div>
 {% endblock content %}

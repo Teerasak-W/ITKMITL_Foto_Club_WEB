@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
-from account.models import Request, User_Account
-from .models import Activities, Date_time, Contact
-from .forms import Create_Activities, Request_Activities, Request_Datetime, Request_Contact
+from account.models import Request, User_Account, Request_contact, Request_datetime
+from .models import Activities, Date_time, Contact, Staff
+from .forms import Request_Activities, Request_Datetime, Request_Contact
 
 # Create your views here.
 
@@ -22,37 +22,42 @@ def createSuggestion(request):
     #if request.method == "POST":
     return render(request, 'suggestion.html')
 
-def view_activities(request,activities_id):
-    activities = Activities.objects.get(pk = activities_id)
+def view_activities(request,id):
+    activities = Activities.objects.get(pk = id)
+    staff = Staff.objects.filter(activity_id = activities.rq_id)
+    print(staff)
     return render(request, 'activities.html', context={
         'activities' : activities,
-        'activities_id': activities_id,
+        'id': id,
+        'staff':staff,
     })
-def create_activities(request):
-    if request.method == 'POST':
-        form = Create_Activities(request.POST)
-        if form.is_valid():
-        # try:
-        #     upload_file = request.FILES['picfile']
-        #     fs = FileSystemStorage()
-        #     name = fs.save(upload_file.name, upload_file)
-        #     url = fs.url(name)
-        # except MultiValueDictKeyError:
-        #     upload_file = False
-        #     url = '\media\default.PNG'
-        # print(url)
-            activities = Activities.objects.create(
-                activity_title = request.POST.get('activity_title'),
-                # picture_path = request.POST.get('picture_path'),
-                location = request.POST.get('location'),
-            )
-            print(activities)
-            if activities:
-                return redirect('/index/')
-    else:
-        form = Create_Activities()
-        print(form)
-    return render(request, 'create_activities.html', {'form': form})
+    
+def create_activities(request,id):
+    v_request = Request.objects.get(pk = id)
+    c_request = Request_contact.objects.filter(ar_id = id)
+    t_request = Request_datetime.objects.filter(ar_id = id)
+    activities = Activities.objects.create(
+        activity_title = v_request.request_title,
+        location = v_request.location,
+        picture_path = v_request.picture_path,
+        rq_id = v_request,
+    )
+    for c in c_request:
+        contact = Contact.objects.create(
+            activity_id = activities,
+            contact_person = c.name,
+            contact_number = c.number,
+        )
+    for t in t_request:
+        date_time = Date_time.objects.create(
+            activity_id = activities,
+            start_time = t.start_time,
+            finish_time = t.start_time,
+        )
+    v_request.request_status = True
+    v_request.save()
+    if activities:
+        return redirect('/index/')
 
 def request_activities(request):
     if request.method == 'POST':
@@ -72,34 +77,56 @@ def request_activities(request):
         form_RA = Request_Activities()
     return render(request, 'request_activities.html', context={'form_RA': form_RA,})
 
-def request_add(request,id):
+def add_contact(request,id):
+    if request.method == 'POST':
+        form_CT = Request_Contact(request.POST)
+        if form_CT.is_valid():
+            request_contact = Request_contact.objects.create(
+                name = request.POST.get('contact_person'),
+                number = request.POST.get('contact_number'),
+                ar_id = Request.objects.get(pk = id),
+            )
+        if request_contact:
+            return redirect('/view_request/')
+    else:
+        form_CT = Request_Contact()
+    return render(request, 'add_contact.html', {'form_CT':form_CT})
+
+def add_time(request,id):
     if request.method == 'POST':
         form_DT = Request_Datetime(request.POST)
-        form_CT = Request_Contact(request.POST)
         if form_DT.is_valid():
-            request_datetime = Date_time.objects.create(
+            request_datetime = Request_datetime.objects.create(
                 start_time = request.POST.get('start_time'),
                 finish_time = request.POST.get('finish_time'),
-                activity_id = id,
+                ar_id = Request.objects.get(pk = id),
             )
-        if form_CT.is_valid():
-            request_contact = Contact.objects.create(
-                contact_person = request.POST.get('contact_person'),
-                contact_number = request.POST.get('contact_number'),
-                activity_id = id,
-            )
-        if request_activities:
-            return redirect('/index/')
+        if request_datetime:
+            return redirect('/view_request/')
     else:
         form_DT = Request_Datetime()
-        form_CT = Request_Contact()
-    return render(request, 'request_add.html', {'form_DT':form_DT, 'form_CT':form_CT})
+    return render(request, 'add_time.html', {'form_DT':form_DT})
 
 def view_request(request):
     v_request = Request.objects.all()
-    u_request = User_Account(user_id = request.user)
-    print(u_request.audience)
-    print(u_request.member)
-    return render(request, 'view_request.html', context={'v_request': v_request,'u_request':u_request})
+    u_request = User_Account.objects.get(user_id = request.user.id)
+    c_request = Request_contact.objects.all()
+    t_request = Request_datetime.objects.all()
+    s_request = Staff.objects.all()
+    print(u_request.user_id.id)
+    print(u_request)
+    return render(request, 'view_request.html', context={
+        'v_request':v_request,
+        'u_request':u_request,
+        'c_request':c_request,
+        't_request':t_request,
+        's_request':s_request,
+        })
 
-
+def add_staff(request,id):
+    staff = Staff.objects.create(
+        staff_id = request.user,
+        activity_id = Request.objects.get(pk = id),
+    )
+    return redirect('/view_request/')
+    

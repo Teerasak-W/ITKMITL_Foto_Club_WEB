@@ -25,14 +25,14 @@ class Request(models.Model):
 
 
 class Request_contact(models.Model):
-    request_id = models.ForeignKey(Request, on_delete=models.CASCADE)
+    ar_id = models.ForeignKey(Request, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     number = models.CharField(max_length=10)
 
-class Request_Datetime(models.Model):
-    request_id = models.ForeignKey(Request, on_delete=models.CASCADE)
-    start_time = models.DateTimeField(auto_now=True)
-    finish_time = models.DateTimeField(auto_now=True)
+class Request_datetime(models.Model):
+    ar_id = models.ForeignKey(Request, on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    finish_time = models.DateTimeField()
 
 class Audience_suggestion(models.Model):
     detail = models.TextField()

@@ -61,8 +61,8 @@ def add_member(requset,id):
     add_to.member = True
     print(add_to.member)
     add_to.save()
+    print(add_to)
     if add_to.member == True:
-        return redirect('/index/')
-    return render(request, 'view_post.html', context={})
+        return redirect('/view_audience/')
     
 

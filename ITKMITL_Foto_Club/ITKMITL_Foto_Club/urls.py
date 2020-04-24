@@ -23,11 +23,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('', actv.index),
-    path('index/', actv.index),
-    path('activities/', actv.view_activities, name='activities'),
-    path('create_activities/', actv.create_activities, name='create_activities'),
+    path('index/', actv.index, name='index'),
+
+    path('activities/<int:id>/', actv.view_activities, name='activities'),
+    path('create_activities/<int:id>/', actv.create_activities, name='create_activities'),
     path('request_activities/', actv.request_activities, name='request_activities'),
     path('view_request/', actv.view_request, name='view_request'),
+    path('view_request/add_time/<int:id>/', actv.add_time, name='add_time'),
+    path('view_request/add_contact/<int:id>/', actv.add_contact, name='add_contact'),
+    path('view_request/add_staff/<int:id>/', actv.add_staff, name='add_staff'),
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),

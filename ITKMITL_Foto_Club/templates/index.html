@@ -20,6 +20,7 @@
             <div class="card-body text-grey">
             <div class="card-title font-weight-bold">{{ a.activity_title }}</div>
             <p class="card-text">{{ a.location }}</p>
+            <a role="button" href="{% url 'activities' id=a.id %}" class="btn btn-primary multiShadow text-white">View</a>
             </div>
         </div>
         </div>
