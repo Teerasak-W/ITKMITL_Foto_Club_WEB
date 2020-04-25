@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from account.forms import Sign_Up
+from account.forms import Sign_Up, suggestionForm
 from activities import views
 from .models import User_Account
 
@@ -64,5 +64,9 @@ def add_member(requset,id):
     print(add_to)
     if add_to.member == True:
         return redirect('/view_audience/')
-    
+
+def create_suggestion(request):
+    if request.method == "POST":
+        form = suggestionForm(request)
+    return render(request, 'suggestion.html', {'form': form})    
 

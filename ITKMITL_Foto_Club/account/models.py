@@ -34,8 +34,6 @@ class Request_datetime(models.Model):
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField()
 
-class Audience_suggestion(models.Model):
-    detail = models.TextField()
-
-class Member_suggestion(models.Model):
+class suggestion(models.Model):
+    title = models.TextField()
     detail = models.TextField()
