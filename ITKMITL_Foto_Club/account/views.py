@@ -78,7 +78,9 @@ def view_suggestion(request):
     context = {'suggest' : suggest}
     return render(request, 'view_suggestion.html', context)
 
-
 def add_Equipment(request):
+    return redirect('index')
+
+def view_Equipment(requst):
     return redirect('index')
 

@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-    <div class="center">
+<div class="center">
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">title</th>
+            <th scope="col">detail</th>
+        </tr>
+    </thead>
+        <tbody>
         {% for field in suggest %}
-        {{ field.title }}<br>
-        {{ field.detail }}<br>
-        <br>
+        <tr>
+        <td>{{ field.title }}</td>
+        <td>{{ field.detail }}</td>
+        </tr>
         {% endfor %}
-    </div>
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
