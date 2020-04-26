@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from account.forms import Sign_Up, suggestionForm
 from activities import views
-from .models import User_Account
+from .models import User_Account, suggestion
 
 # Create your views here.
 def my_sign_in(request):
@@ -63,7 +63,13 @@ def add_member(requset,id):
         return redirect('/view_audience/')
 
 def create_suggestion(request):
+    suggest = suggestionForm(request.POST)
     if request.method == "POST":
-        form = suggestionForm(request)
-    return render(request, 'suggestion.html', {'form': form})    
+        if suggest.is_valid():
+            a = suggestion.objects.create(
+            title = request.POST.get('title'),
+            detail = request.POST.get('detail')
+        )
+    context = {'form': suggest}
+    return render(request, 'suggestion.html', context)    
 

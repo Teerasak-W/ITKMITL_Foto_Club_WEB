@@ -45,7 +45,7 @@ urlpatterns = [
     path('sign_up/', accv.my_sign_up, name='sign_up'),
     path('view_audience/', accv.views_audience, name='view_audience'),
     path('add_member/<int:id>/', accv.add_member, name='add_member'),
-    path('suggestion/', actv.createSuggestion, name='suggestion'),
+    path('suggestion/', accv.create_suggestion, name='suggestion'),
 ]
 
 if settings.DEBUG:

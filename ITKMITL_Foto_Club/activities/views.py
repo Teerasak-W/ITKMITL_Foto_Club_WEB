@@ -22,9 +22,7 @@ def index(request):
     print(request.user)
     return render(request, 'index.html', context={'user_view': user_view,'activities': activities})
 
-def createSuggestion(request):
-    #if request.method == "POST":
-    return render(request, 'suggestion.html')
+
 
 def view_activities(request,id):
     activities = Activities.objects.get(pk = id)
