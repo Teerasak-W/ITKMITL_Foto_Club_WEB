@@ -71,5 +71,14 @@ def create_suggestion(request):
             detail = request.POST.get('detail')
         )
     context = {'form': suggest}
-    return render(request, 'suggestion.html', context)    
+    return render(request, 'suggestion.html', context)  
+
+def view_suggestion(request):
+    suggest = suggestion.objects.all()
+    context = {'suggest' : suggest}
+    return render(request, 'view_suggestion.html', context)
+
+
+def add_Equipment(request):
+    return redirect('index')
 

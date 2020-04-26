@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    <div class="center">
+        {% for field in suggest %}
+        {{ field.title }}<br>
+        {{ field.detail }}<br>
+        <br>
+        {% endfor %}
+    </div>
+{% endblock content %}
