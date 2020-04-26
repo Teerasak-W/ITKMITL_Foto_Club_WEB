@@ -4,7 +4,7 @@ from account.models import Request
 # Create your models here.
 class Activities(models.Model):
     activity_title = models.CharField(max_length=50)
-    picture_path = models.URLField(max_length = 500,null = True) 
+    picture_path = models.FileField(upload_to='activities')
     location = models.TextField()
     rq_id = models.ForeignKey(Request, on_delete=models.CASCADE)
 
@@ -19,8 +19,7 @@ class Album(models.Model):
 
 class Picture(models.Model):
     album_id = models.ForeignKey(Album, on_delete=models.CASCADE)
-    album_name = models.CharField(max_length=50)
-    picture_path = models.URLField(max_length = 500,null = True)
+    picture_path = models.FileField(upload_to='album')
 
 class Contact(models.Model):
     activity_id = models.ForeignKey(Activities, on_delete=models.CASCADE)

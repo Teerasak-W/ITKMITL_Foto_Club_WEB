@@ -6,6 +6,9 @@
   {% for a in p_request %}
   <div class="col-md-3 my-2">
   <div class="card multiShadow">
+      <div class="text-center">
+        <img src="/media/{{ a.picture_path }}" class="multiShadow" height="150" alt="...">
+      </div>
       <div class="card-body text-grey">
       <div class="card-title font-weight-bold">{{ a.user_id }}</div>
       <p class="card-text">{{ a.student_id }}</p>

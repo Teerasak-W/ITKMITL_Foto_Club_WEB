@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
@@ -25,13 +27,18 @@ urlpatterns = [
     path('', actv.index),
     path('index/', actv.index, name='index'),
 
+
     path('activities/<int:id>/', actv.view_activities, name='activities'),
+    path('activities/album/<int:id>', actv.view_album, name='view_album'),
     path('create_activities/<int:id>/', actv.create_activities, name='create_activities'),
     path('request_activities/', actv.request_activities, name='request_activities'),
     path('view_request/', actv.view_request, name='view_request'),
     path('view_request/add_time/<int:id>/', actv.add_time, name='add_time'),
     path('view_request/add_contact/<int:id>/', actv.add_contact, name='add_contact'),
     path('view_request/add_staff/<int:id>/', actv.add_staff, name='add_staff'),
+    path('add_album/<int:id>/', actv.add_album, name='add_album'),
+    path('add_picture/<int:id>/', actv.add_picture, name='add_picture'),
+
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),
@@ -40,3 +47,7 @@ urlpatterns = [
     path('add_member/<int:id>/', accv.add_member, name='add_member'),
     path('suggestion/', actv.createSuggestion, name='suggestion'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

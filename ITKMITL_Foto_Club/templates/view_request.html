@@ -4,18 +4,24 @@
     <div class="center">
       <div class="row px-3">
       {% for a in v_request %}
+      {% if user.id == a.user_id.id or u_request.admin %}
       <div class="col-md-3 my-2">
       <div class="card multiShadow">
+          <div class="text-center">
+            <img src="/media/{{ a.picture_path }}" class="multiShadow" height="120" alt="...">
+          </div>
           <div class="card-body text-grey">
-          <div class="card-title font-weight-bold">{{ a.id }} {{ a.request_title }}</div>
+          <div class="card-title font-weight-bold">{{ a.request_title }}</div>
           {% if a.request_status %}
           <p class="btn btn-success multiShadow text-white">Approved</p>
           {% else %}
           <p class="btn btn-warning multiShadow text-white">Checking</p>
           {% endif %}
-          <p class="card-text">{{ a.location }}</p>
-          <p class="card-text">{{ a.user_id }}</p>
+          <div class="card-title font-weight-bold">Location: {{ a.location }}</div>
+          <div class="card-title font-weight-bold">Detail</div>
           <p class="card-text">{{ a.detail }}</p>
+          <div class="card-title font-weight-bold">Request by</div>
+          <p class="card-text">{{ a.user_id }}</p>
           <div class="card-title font-weight-bold">Date Time</div>
           {% for t in t_request %}
             {% if t.ar_id.id == a.id %}
@@ -53,6 +59,7 @@
           </div>
       </div>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
     </div>

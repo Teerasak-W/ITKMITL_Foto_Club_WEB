@@ -15,7 +15,6 @@ def my_sign_in(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username, password)
 
         user = authenticate(request, username=username, password=password)
 
@@ -36,11 +35,12 @@ def my_sign_up(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=username, password=raw_password, is_active=True)
             login(request, user)
             user_account = User_Account.objects.create(
                 user_id = request.user,
                 student_id = request.POST.get('student_id'),
+                picture_path = request.FILES['picture'],
             )
             return redirect('/index/')
     else:
@@ -57,11 +57,8 @@ def views_audience(request):
 
 def add_member(requset,id):
     add_to = User_Account.objects.get(pk=id)
-    print(add_to.member)
     add_to.member = True
-    print(add_to.member)
     add_to.save()
-    print(add_to)
     if add_to.member == True:
         return redirect('/view_audience/')
 

@@ -3,7 +3,7 @@ from django import forms
 class Request_Activities(forms.Form):
     request_title = forms.CharField(max_length=50)
     location = forms.CharField()
-    # picture_path = forms.URLField(max_length = 500) 
+    picture_path = forms.FileField(required=False)
     detail = forms.CharField(widget=forms.Textarea)
 
 class Request_Contact(forms.Form):

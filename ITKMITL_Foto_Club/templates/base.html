@@ -32,13 +32,16 @@
     <nav class="navbar navbar-transparent sticky-top px-3">
       <a class="navbar-brand mr-auto" href="{% url 'index' %}">
         <img src="{% static '/assets/fotoBrand.png' %}" class="multiShadow" height="40" alt="IT FOTO Club Logo">
-        <h3 class="text-center text-white font-weight-normal multiShadow" >Hello~ {{request.user.username}}</h3>
       </a>
       {% if user.is_authenticated %}
-      <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">view_audience</a>
-      <a role="button" href="{% url 'view_request' %}" class="btn btn-primary multiShadow text-white">view_request</a>
-      <a role="button" href="{% url 'request_activities' %}"class="btn btn-primary multiShadow text-white">request_activities</a>
-      <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>
+        {% if user.is_active %}
+          <a role="button" href="{% url 'request_activities' %}"class="btn btn-primary multiShadow text-white">request_activities</a>
+        {% endif %}
+        {% if user.is_staff %}
+          <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">view_audience</a>
+        {% endif %}
+        <a role="button" href="{% url 'view_request' %}" class="btn btn-primary multiShadow text-white">view_request</a>
+        <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>
       {% else %}
       <a href="{% url 'sign_in' %}"
         class="text-center text-white font-weight-normal text-decoration-none mx-2 px-3 multiShadow">Sign in</a>

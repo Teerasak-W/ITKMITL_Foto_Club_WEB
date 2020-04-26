@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class User_Account(models.Model):
     user_id = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,)
     student_id = models.CharField(max_length=8)
-    picture_path = models.URLField(max_length = 500,null = True)
+    picture_path = models.FileField(upload_to='user')
     audience = models.BooleanField(default=True)
     member = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
@@ -18,7 +18,7 @@ class Equipment(models.Model):
 class Request(models.Model):
     request_title = models.CharField(max_length=50)
     location = models.TextField()
-    picture_path = models.URLField(max_length = 500,null = True) 
+    picture_path = models.FileField(upload_to='activities')
     detail = models.TextField()
     request_status = models.BooleanField(default=False)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)

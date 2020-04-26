@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
     <div class="center">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form_RA %}
         <p>

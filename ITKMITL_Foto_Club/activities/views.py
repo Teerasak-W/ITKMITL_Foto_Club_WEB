@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.db import IntegrityError
 from django.views.generic import TemplateView
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout
@@ -7,15 +8,18 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from account.models import Request, User_Account, Request_contact, Request_datetime
-from .models import Activities, Date_time, Contact, Staff
+from .models import Activities, Date_time, Contact, Staff, Album, Picture
 from .forms import Request_Activities, Request_Datetime, Request_Contact
 
 # Create your views here.
 
 def index(request):
-    user_view = request.user
+    if request.user.is_authenticated:
+        user_view = User_Account.objects.get(user_id = request.user)
+    else:
+        user_view = request.user
     activities = Activities.objects.all()
-    # print(activities)
+    print(request.user)
     return render(request, 'index.html', context={'user_view': user_view,'activities': activities})
 
 def createSuggestion(request):
@@ -25,11 +29,13 @@ def createSuggestion(request):
 def view_activities(request,id):
     activities = Activities.objects.get(pk = id)
     staff = Staff.objects.filter(activity_id = activities.rq_id)
+    album = Album.objects.filter(activity_id = activities.id)
     print(staff)
     return render(request, 'activities.html', context={
         'activities' : activities,
         'id': id,
         'staff':staff,
+        'album':album,
     })
     
 def create_activities(request,id):
@@ -66,10 +72,11 @@ def request_activities(request):
             request_activities = Request.objects.create(
                 request_title = request.POST.get('request_title'),
                 location = request.POST.get('location'),
-                picture_path = request.POST.get('picture_path'),
+                picture_path = request.FILES['picture_path'],
                 detail = request.POST.get('detail'),
                 user_id = request.user,
             )
+            print(request.FILES['picture_path'])
         if request_activities:
             return redirect('/index/')
 
@@ -113,8 +120,6 @@ def view_request(request):
     c_request = Request_contact.objects.all()
     t_request = Request_datetime.objects.all()
     s_request = Staff.objects.all()
-    print(u_request.user_id.id)
-    print(u_request)
     return render(request, 'view_request.html', context={
         'v_request':v_request,
         'u_request':u_request,
@@ -130,3 +135,23 @@ def add_staff(request,id):
     )
     return redirect('/view_request/')
     
+def add_album(request,id):
+    album = Album.objects.create(
+        activity_id = Activities.objects.get(pk = id),
+        album_name = request.POST.get('album_name'),
+    )
+    return redirect('/activities/%d/'%id)
+
+def view_album(request,id):
+    album = Album.objects.filter(id=id)
+    pic = Picture.objects.filter(album_id=id)
+    return render(request, 'view_album.html', context={'album':album,'pic':pic})
+
+def add_picture(request,id):
+    album_name = request.FILES.getlist('picture_name')
+    for i in album_name:
+        picture = Picture.objects.create(
+            album_id = Album.objects.get(pk = id),
+            picture_path = i,
+        )
+    return redirect('/activities/album/%d'%id)

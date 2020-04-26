@@ -3,6 +3,12 @@
 {% load static %}
 <!-- content -->
 <div class="container">
+    {% if user.is_authenticated %}
+    <div class="text-center">
+        <img src="/media/{{ user_view.picture_path }}" class="rounded multiShadow" height="120" alt="">
+    </div>
+    {% endif %}
+    <h3 class="text-center text-white font-weight-normal multiShadow" >Hello~ {{user_view.user_id.username}}</h3>
     <div class="row px-3 pt-md-5">
         <div class="col-12 h1 font-weight-normal text-white multiShadow">Where your precious times<br>become images.</div>
         <div class="col-12 col-md-8 text-normal font-weight-light text-white multiShadow">
@@ -15,8 +21,10 @@
     <div class="row px-3">
         {% for a in activities %}
         <div class="col-md-3 my-2">
-        <div class="card multiShadow">
-            <img src="{% static '/assets/000040.JPEG' %}" class="card-img-top" alt="...">
+        <div class="card multiShadow"> 
+            <div class="text-center">
+                <img src="/media/{{ a.picture_path }}" class="multiShadow" height="120" alt="...">
+            </div>
             <div class="card-body text-grey">
             <div class="card-title font-weight-bold">{{ a.activity_title }}</div>
             <p class="card-text">{{ a.location }}</p>

@@ -33,17 +33,15 @@
               </div>
               <br>
               <button type="submit" class="btn btn-lg btn-primary text-white w-100">Sign in</button>
-              <div class="col-12 text-center mt-3">
-                <a href="{% static '/pages/password_recovery.html' %}" class="text-muted mt-5 font-weight-light"><em>Forget Password
-                    ?</em></a>
-              </div>
-              <div class="col-12 text-center mt-3">
-                <a href="{% url 'sign_up' %}">
-                  <button class="btn btn-outline-light text-muted w-100" href="{% url 'sign_up' %}">
-                    <em class="font-weight-light">Need an account ?</em> Sign up</button>
-                </a>
-              </div>
             </form>
+            <div class="col-12 text-center mt-3">
+              <a href="{% static '/pages/password_recovery.html' %}" class="text-muted mt-5 font-weight-light"><em>Forget Password
+                  ?</em></a>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <a class="btn btn-outline-light text-muted w-100" href="{% url 'sign_up' %}">
+                  <em class="font-weight-light">Need an account ?</em> Sign up</a>
+            </div>
           </div>
         </div>
       </div>
