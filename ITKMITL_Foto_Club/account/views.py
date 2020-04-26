@@ -5,9 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from account.forms import Sign_Up, suggestionForm
+from account.forms import Sign_Up, suggestionForm, EquipmentForm
 from activities import views
-from .models import User_Account, suggestion
+from .models import User_Account, suggestion, Equipment
+from django.forms import formset_factory
 
 # Create your views here.
 def my_sign_in(request):
@@ -79,8 +80,21 @@ def view_suggestion(request):
     return render(request, 'view_suggestion.html', context)
 
 def add_Equipment(request):
-    return redirect('index')
+    equipment_formset = formset_factory(EquipmentForm, extra=2)
+    if request.method == "POST":
+        formset = equipment_formset(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                equip = Equipment.objects.create(
+                    equipment_type = form.cleaned_data['equipment_type'],
+                    equipment_detail = form.cleaned_data['equipment_detail'],
+                    equipment_title = form.cleaned_data['equipment_title'],
+            )
+    else:
+        formset = equipment_formset()
+        
+    return render(request, 'equipment.html', context={'formset':formset})
 
-def view_Equipment(requst):
-    return redirect('index')
+# def view_Equipment(requst):
+#     return redirect('index')
 
