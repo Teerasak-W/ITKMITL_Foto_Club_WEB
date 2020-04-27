@@ -11,5 +11,17 @@ class Request_Contact(forms.Form):
     contact_number = forms.CharField(max_length=10,required=True, help_text='Phone number')
 
 class Request_Datetime(forms.Form):
-    start_time = forms.DateTimeField(required=True, help_text='YYYY-MM-DD HH:MM')
-    finish_time = forms.DateTimeField(required=True, help_text='YYYY-MM-DD HH:MM')
+    start_time = forms.DateTimeField(input_formats = ['%Y-%m-%dT%H:%M'],
+        widget = forms.DateTimeInput(
+            attrs={
+                'type': 'datetime-local',
+                'class': 'form-control'},
+            format='%Y-%m-%dT%H:%M')
+    )
+    finish_time = forms.DateTimeField(input_formats = ['%Y-%m-%dT%H:%M'],
+        widget = forms.DateTimeInput(
+            attrs={
+                'type': 'datetime-local',
+                'class': 'form-control'},
+            format='%Y-%m-%dT%H:%M')
+    )
