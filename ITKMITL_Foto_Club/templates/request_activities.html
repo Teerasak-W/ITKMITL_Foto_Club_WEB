@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
+{% block javascript %}
+  <script>
+    $("#id_request_title").change(function () {
+      console.log( $(this).val() );
+      var request_title = $(this).val();
+      $.ajax({
+        url: '/ajax/validate_request_title/',
+        data: {
+          'request_title': request_title
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A Request with this title already exists.");
+          }
+        }
+      });
+      console.log( $(this).val() );
+    });
+  </script>
+{% endblock %}
 <div class="center">
   <div class="container h-auto mb-5">
     <div class="row h-100">
@@ -10,7 +31,7 @@
             <img src="{% static '/assets/logoHeader.png' %}" height="60" alt="">
           </div>
           <div class="card-body">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" data-validate-request_title-url="{% url 'validate_request_title' %}">
             {% csrf_token %}
             {% for field in form_RA %}
             <p>

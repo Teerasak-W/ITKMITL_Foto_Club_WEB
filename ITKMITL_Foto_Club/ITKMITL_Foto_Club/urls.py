@@ -40,6 +40,7 @@ urlpatterns = [
     path('add_picture/<int:at_id>/<int:id>/', actv.add_picture, name='add_picture'),
     path('remove_picture/<int:at_id>/<int:id>/<int:pic_id>/', actv.remove_picture, name='remove_picture'),
 
+    path('ajax/validate_request_title/', actv.validate_request_title, name='validate_request_title'),
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),

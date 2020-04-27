@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
+from django.http import JsonResponse
 from account.models import Request, User_Account, Request_contact, Request_datetime
 from .models import Activities, Date_time, Contact, Staff, Album, Picture
 from .forms import Request_Activities, Request_Datetime, Request_Contact
@@ -171,3 +172,10 @@ def remove_picture(request,at_id,id,pic_id):
     picture = Picture.objects.get(pk=pic_id)
     picture.delete()
     return redirect('/activities/album/%d/%d'%(at_id,id))
+
+def validate_request_title(request):
+    username = request.GET.get('request_title', None)
+    data = {
+        'is_taken': Request.objects.filter(request_title=username).exists()
+    }
+    return JsonResponse(data)

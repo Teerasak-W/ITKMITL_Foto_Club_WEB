@@ -35,5 +35,5 @@ class Request_datetime(models.Model):
     finish_time = models.DateTimeField()
 
 class suggestion(models.Model):
-    title = models.TextField()
+    title = models.CharField(max_length=50)
     detail = models.TextField()

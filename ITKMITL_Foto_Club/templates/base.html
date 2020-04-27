@@ -51,6 +51,7 @@
         {% if user.is_staff %}
           <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">view_audience</a>
           <a role="button" href="{% url 'equipment' %}" class="btn btn-primary multiShadow text-white">Add Equipment</a>
+          <a role="button" href="{% url 'view_equipment' %}" class="btn btn-primary multiShadow text-white">View Equipment</a>
         {% endif %}
 
         {% if user.is_supersuer %}
@@ -86,6 +87,8 @@
       </span>
     </div>
   </footer>
+  {% block javascript %}
+  {% endblock %}
   
 </body>
 </html>
