@@ -60,6 +60,10 @@ def add_member(requset,id):
     add_to = User_Account.objects.get(pk=id)
     add_to.member = True
     add_to.save()
+    user = User.objects.get(pk=add_to.user_id.id)
+    user.is_staff = True
+    user.save()
+
     if add_to.member == True:
         return redirect('/view_audience/')
 

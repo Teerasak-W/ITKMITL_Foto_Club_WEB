@@ -22,18 +22,23 @@ def index(request):
     print(request.user)
     return render(request, 'index.html', context={'user_view': user_view,'activities': activities})
 
-
-
 def view_activities(request,id):
     activities = Activities.objects.get(pk = id)
     staff = Staff.objects.filter(activity_id = activities.rq_id)
     album = Album.objects.filter(activity_id = activities.id)
-    print(staff)
+    for a in staff:
+        status = (a.staff_id == request.user)
+        if status:
+            break
+        else:
+            status = False
+    print(status)
     return render(request, 'activities.html', context={
         'activities' : activities,
         'id': id,
         'staff':staff,
         'album':album,
+        'status':status,
     })
     
 def create_activities(request,id):
@@ -140,16 +145,24 @@ def add_album(request,id):
     )
     return redirect('/activities/%d/'%id)
 
-def view_album(request,id):
+def view_album(request,at_id,id):
     album = Album.objects.filter(id=id)
+    staff = Staff.objects.filter(activity_id = at_id)
     pic = Picture.objects.filter(album_id=id)
-    return render(request, 'view_album.html', context={'album':album,'pic':pic})
+    for a in staff:
+        status = (a.staff_id == request.user)
+        if status:
+            break
+        else:
+            status = False
+    print(status)
+    return render(request, 'view_album.html', context={'album':album,'pic':pic,'staff':staff, 'status':status})
 
-def add_picture(request,id):
+def add_picture(request,at_id,id):
     album_name = request.FILES.getlist('picture_name')
     for i in album_name:
         picture = Picture.objects.create(
             album_id = Album.objects.get(pk = id),
             picture_path = i,
         )
-    return redirect('/activities/album/%d'%id)
+    return redirect('/activities/album/%d/%d'%(at_id,id))

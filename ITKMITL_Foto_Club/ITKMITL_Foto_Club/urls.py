@@ -29,7 +29,7 @@ urlpatterns = [
 
 
     path('activities/<int:id>/', actv.view_activities, name='activities'),
-    path('activities/album/<int:id>', actv.view_album, name='view_album'),
+    path('activities/album/<int:at_id>/<int:id>/', actv.view_album, name='view_album'),
     path('create_activities/<int:id>/', actv.create_activities, name='create_activities'),
     path('request_activities/', actv.request_activities, name='request_activities'),
     path('view_request/', actv.view_request, name='view_request'),
@@ -37,7 +37,7 @@ urlpatterns = [
     path('view_request/add_contact/<int:id>/', actv.add_contact, name='add_contact'),
     path('view_request/add_staff/<int:id>/', actv.add_staff, name='add_staff'),
     path('add_album/<int:id>/', actv.add_album, name='add_album'),
-    path('add_picture/<int:id>/', actv.add_picture, name='add_picture'),
+    path('add_picture/<int:at_id>/<int:id>/', actv.add_picture, name='add_picture'),
 
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),

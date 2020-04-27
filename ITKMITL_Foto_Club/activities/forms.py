@@ -7,9 +7,9 @@ class Request_Activities(forms.Form):
     detail = forms.CharField(widget=forms.Textarea)
 
 class Request_Contact(forms.Form):
-    contact_person = forms.CharField(max_length=50)
-    contact_number = forms.CharField(max_length=10)
+    contact_person = forms.CharField(max_length=50,required=True, help_text='Name')
+    contact_number = forms.CharField(max_length=10,required=True, help_text='Phone number')
 
 class Request_Datetime(forms.Form):
-    start_time = forms.DateTimeField()
-    finish_time = forms.DateTimeField()
+    start_time = forms.DateTimeField(required=True, help_text='YYYY-MM-DD HH:MM')
+    finish_time = forms.DateTimeField(required=True, help_text='YYYY-MM-DD HH:MM')

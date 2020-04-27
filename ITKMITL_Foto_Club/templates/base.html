@@ -16,14 +16,22 @@
         background-size: cover;
         min-height: 100%;
         }
-    @media only screen and (max-width: 768px) {
-    body,html {
-        background-repeat: no-repeat;
-        background-position: center top;
-        background-attachment: scroll;
-        background-size: cover;
+      @media only screen and (max-width: 768px) {
+        body,html {
+          background-repeat: no-repeat;
+          background-position: center top;
+          background-attachment: scroll;
+          background-size: cover;
         }
-    }
+      }
+      .zoom {
+        transition: transform .2s;
+      }
+
+      .zoom:hover {
+        position: relative;
+        transform: scale(1.5);
+        z-index: 1;
   </style>
 </head>
 <body>
@@ -37,9 +45,11 @@
         {% if user.is_active %}
           <a role="button" href="{% url 'request_activities' %}"class="btn btn-primary multiShadow text-white">request_activities</a>
         {% endif %}
+
         {% if user.is_staff %}
           <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">view_audience</a>
         {% endif %}
+
         <a role="button" href="{% url 'view_request' %}" class="btn btn-primary multiShadow text-white">view_request</a>
         <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>
       {% else %}

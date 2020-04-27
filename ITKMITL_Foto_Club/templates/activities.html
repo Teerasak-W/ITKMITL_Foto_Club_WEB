@@ -16,7 +16,7 @@
                 <p class="card-text">{{ s.staff_id.first_name }} {{ s.staff_id.last_name }}</p>
             {% endfor %}
 
-            {% if user.is_authenticated %}
+            {% if user.is_superuser or status %}
             <form action="{% url 'add_album' id=activities.id %}" method="POST">
                 {% csrf_token %}
                 <input type="text" class="form-control form-control-lg border-top-0 border-left-0 border-right-0 border-bottom rounded-0" id="album_name" 
@@ -33,7 +33,7 @@
                         </div>
                         <div class="card-body text-grey">
                             <p class="card-text">Album {{ a.album_name }}</p>
-                            <a role="button" href="{% url 'view_album' id=a.id %}" class="btn btn-primary multiShadow text-white">View</a>
+                            <a role="button" href="{% url 'view_album' at_id=activities.id id=a.id %}" class="btn btn-primary multiShadow text-white">View</a>
                         </div>
                     </div>
                     </div>
