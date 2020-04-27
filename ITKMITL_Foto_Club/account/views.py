@@ -93,6 +93,7 @@ def add_Equipment(request):
                     equipment_type = form.cleaned_data['equipment_type'],
                     equipment_detail = form.cleaned_data['equipment_detail'],
                     equipment_title = form.cleaned_data['equipment_title'],
+                    user_id = form.cleaned_data['user_id']
             )
     else:
         formset = equipment_formset()
