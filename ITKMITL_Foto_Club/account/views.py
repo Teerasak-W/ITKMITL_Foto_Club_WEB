@@ -99,6 +99,7 @@ def add_Equipment(request):
         
     return render(request, 'equipment.html', context={'formset':formset})
 
-# def view_Equipment(requst):
-#     return redirect('index')
+def view_Equipment(request):
+    eqip = Equipment.objects.all()
+    return render(request, 'view_equipment.html', context={'eqip':eqip})
 

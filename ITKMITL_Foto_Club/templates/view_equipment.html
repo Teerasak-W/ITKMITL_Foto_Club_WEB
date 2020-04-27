@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="center">
+    <div class="container h-auto mb-5">
+        <div class="row h-100">
+            <div class="col-md-6 col-12 my-auto mx-auto">
+                <div class="card px-0 py-0 border-0">
+                    <div class="py-3 text-center bg-primary font-weight-bold text-white rounded-top">
+                        <img src="{% static '/assets/logoHeader.png' %}" height="60" alt="">
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            {{eqip.as_p}}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
