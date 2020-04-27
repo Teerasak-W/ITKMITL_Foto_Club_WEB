@@ -14,6 +14,7 @@ class Equipment(models.Model):
     equipment_type = models.CharField(max_length=1, choices=type_for)
     equipment_detail = models.TextField()
     equipment_title = models.CharField(max_length=50)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Request(models.Model):
     request_title = models.CharField(max_length=50)
