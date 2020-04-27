@@ -11,7 +11,12 @@
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            {{eqip.as_p}}
+                            {% for form in eqip %}
+                            {{ form.equipment_type }}
+                            {{ form.equipment_detail }}
+                            {{ form.equipment_title }}
+                            <br>
+                            {% endfor %}
                         </div>
                 </div>
             </div>

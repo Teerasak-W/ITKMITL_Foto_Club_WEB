@@ -84,7 +84,7 @@ def view_suggestion(request):
     return render(request, 'view_suggestion.html', context)
 
 def add_Equipment(request):
-    equipment_formset = formset_factory(EquipmentForm, extra=2)
+    equipment_formset = formset_factory(EquipmentForm, extra=1)
     if request.method == "POST":
         formset = equipment_formset(request.POST)
         if formset.is_valid():
