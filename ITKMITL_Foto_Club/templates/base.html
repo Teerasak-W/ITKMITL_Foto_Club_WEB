@@ -52,7 +52,15 @@
           <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">view_audience</a>
           <a role="button" href="{% url 'equipment' %}" class="btn btn-primary multiShadow text-white">Add Equipment</a>
         {% endif %}
-        <a role="button" href="{% url 'suggestion' %}" class="btn btn-primary multiShadow text-white">create_suggestion</a>
+
+        {% if user.is_supersuer %}
+          <a role="button" href="{% url 'view_suggestion' %}" class="btn btn-primary multiShadow text-white">View_suggestion</a>
+        {% endif %}
+
+        {% if not user.is_superuser %}
+          <a role="button" href="{% url 'suggestion' %}" class="btn btn-primary multiShadow text-white">create_suggestion</a>
+        {% endif %}
+
         <a role="button" href="{% url 'view_request' %}" class="btn btn-primary multiShadow text-white">view_request</a>
         <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>
       {% else %}

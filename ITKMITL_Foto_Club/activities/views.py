@@ -166,3 +166,8 @@ def add_picture(request,at_id,id):
             picture_path = i,
         )
     return redirect('/activities/album/%d/%d'%(at_id,id))
+
+def remove_picture(request,at_id,id,pic_id):
+    picture = Picture.objects.get(pk=pic_id)
+    picture.delete()
+    return redirect('/activities/album/%d/%d'%(at_id,id))

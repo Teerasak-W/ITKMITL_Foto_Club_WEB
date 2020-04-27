@@ -17,6 +17,9 @@
                     <div class="col-md-2 my-2">
                         <div class="zoom">
                             <img src="/media/{{p.picture_path}}" class="img-thumbnail" alt="...">
+                            {% if user.is_superuser or status %}
+                            <a role="button" href="{% url 'remove_picture' at_id=a.activity_id.id id=a.id pic_id=p.id %}"  class="btn btn-primary multiShadow text-white">Delete</a>
+                            {% endif %}
                         </div>
                     </div>      
                 {% endfor %}

@@ -38,6 +38,7 @@ urlpatterns = [
     path('view_request/add_staff/<int:id>/', actv.add_staff, name='add_staff'),
     path('add_album/<int:id>/', actv.add_album, name='add_album'),
     path('add_picture/<int:at_id>/<int:id>/', actv.add_picture, name='add_picture'),
+    path('remove_picture/<int:at_id>/<int:id>/<int:pic_id>/', actv.remove_picture, name='remove_picture'),
 
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),

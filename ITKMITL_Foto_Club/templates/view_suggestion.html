@@ -2,21 +2,34 @@
 {% block content %}
 {% load static %}
 <div class="center">
-    <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">title</th>
-            <th scope="col">detail</th>
-        </tr>
-    </thead>
-        <tbody>
-        {% for field in suggest %}
-        <tr>
-        <td>{{ field.title }}</td>
-        <td>{{ field.detail }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container h-auto mb-5">
+        <div class="row h-100">
+            <div class="col-md-6 col-12 my-auto mx-auto">
+                <div class="card px-0 py-0 border-0">
+                    <div class="py-3 text-center bg-primary font-weight-bold text-white rounded-top">
+                        <img src="{% static '/assets/logoHeader.png' %}" height="60" alt="">
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">title</th>
+                                <th scope="col">detail</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                            {% for field in suggest %}
+                            <tr>
+                            <td>{{ field.title }}</td>
+                            <td>{{ field.detail }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
