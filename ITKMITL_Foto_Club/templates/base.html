@@ -32,6 +32,7 @@
         position: relative;
         transform: scale(1.5);
         z-index: 1;
+      }
   </style>
 </head>
 <body>
@@ -44,12 +45,14 @@
       {% if user.is_authenticated %}
         {% if user.is_active %}
           <a role="button" href="{% url 'request_activities' %}"class="btn btn-primary multiShadow text-white">request_activities</a>
+          <a role="button" href="{% url 'view_suggestion' %}" class="btn btn-primary multiShadow text-white">View_suggestion</a>
         {% endif %}
 
         {% if user.is_staff %}
           <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">view_audience</a>
+          <a role="button" href="{% url 'equipment' %}" class="btn btn-primary multiShadow text-white">Add Equipment</a>
         {% endif %}
-
+        <a role="button" href="{% url 'suggestion' %}" class="btn btn-primary multiShadow text-white">create_suggestion</a>
         <a role="button" href="{% url 'view_request' %}" class="btn btn-primary multiShadow text-white">view_request</a>
         <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>
       {% else %}
