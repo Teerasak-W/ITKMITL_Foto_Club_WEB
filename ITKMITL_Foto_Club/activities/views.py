@@ -114,12 +114,15 @@ def add_contact(request,id):
 def add_time(request,id):
     if request.method == 'POST':
         form_DT = Request_Datetime(request.POST)
-        if form_DT.is_valid():
+        if form_DT.is_valid() and request.POST.get('start_time') < request.POST.get('finish_time'):
             request_datetime = Request_datetime.objects.create(
                 start_time = request.POST.get('start_time'),
                 finish_time = request.POST.get('finish_time'),
                 ar_id = Request.objects.get(pk = id),
             )
+        else:
+            form_DT = Request_Datetime()
+            return render(request, 'add_time.html', {'form_DT':form_DT,'error':'incorrect'})
         if request_datetime:
             return redirect('/view_request/')
     else:
