@@ -2,12 +2,12 @@
 {% block content %}
 {% load static %}
     <div class="center">
-        <div class="row px-3">
+        <div class="row px-5">
         <div class="col">
         <div class="card multiShadow">
             <div class="card-body text-grey">
             <div class="text-center">
-                <img src="/media/{{ activities.picture_path }}" class="" height="150" alt="...">
+                <img src="/media/{{ activities.picture_path }}" height="150" alt="{{ activities.activity_title }}">
             </div>
             <div class="card-title font-weight-bold">Activities : {{ activities.activity_title }}</div>
             <p class="card-text">location : {{ activities.location }}</p>

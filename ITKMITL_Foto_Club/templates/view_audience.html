@@ -11,10 +11,17 @@
       </div>
       <div class="card-body text-grey">
       <div class="card-title font-weight-bold">{{ a.user_id }}</div>
+      {% if a.admin %}
+        <p class="card-text">(ADMIN)</p>
+      {% elif a.member %}
+        <p class="card-text">(MEMBER)</p>
+      {% else %}
+        <p class="card-text">(AUDIENCE)</p>
+      {% endif %}
       <p class="card-text">{{ a.student_id }}</p>
       <p class="card-text">{{ a.user_id.first_name }}</p>
       <p class="card-text">{{ a.user_id.last_name }}</p>
-      {% if a.audience == True and a.member == False %}
+      {% if user.is_supersuer %}
         <a role="button" href="{% url 'add_member' id=a.user_id.id %}" class="btn btn-primary multiShadow text-white">Add Member</a>
       {% endif %}
       </div>
