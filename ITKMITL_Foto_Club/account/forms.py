@@ -1,8 +1,10 @@
 from django import forms
-from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from account.models import suggestion, Equipment
+from django.forms import ModelForm
+
+from account.models import Equipment, suggestion
+
 
 class Sign_Up(UserCreationForm):
     first_name = forms.CharField(max_length=50, required=True, help_text='Required.')
@@ -28,11 +30,12 @@ type_for = (
     ('3', 'other')
     )
 
-class EquipmentForm(ModelForm):
+class EquipmentForm(ModelForm): 
     equipment_type = forms.ChoiceField(choices=type_for)
     equipment_detail = forms.CharField(required=False)
     equipment_title = forms.CharField(max_length=50, required=False)
     del_flag = forms.BooleanField(initial=False, required=False)
+    equip_id = forms.CharField(widget = forms.HiddenInput, required=False)
     class Meta:
         model = Equipment
         exclude = ['user_id']

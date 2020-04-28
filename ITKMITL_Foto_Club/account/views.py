@@ -122,21 +122,31 @@ def add_Equipment(request):
         if formset.is_valid():
             for form in formset:
                 if form.cleaned_data.get('del_flag'):
-                    equip = Equipment.objects.get(pk =form.cleaned_data['id'])
+                    equip = Equipment.objects.get(pk = form.cleaned_data['equip_id'])
                     equip.delete()
                     continue
-                else:    
-                    equip = Equipment.objects.create(
-                        equipment_type = form.cleaned_data['equipment_type'],
-                        equipment_detail = form.cleaned_data['equipment_detail'],
-                        equipment_title = form.cleaned_data['equipment_title'],
-                        user_id = current_user
-            )
+                if form.cleaned_data.get('equip_id'):
+                    equip = Equipment.objects.get(pk = form.cleaned_data['equip_id'])
+                    equip.equipment_type = form.cleaned_data['equipment_type']
+                    equip.equipment_detail = form.cleaned_data['equipment_detail']
+                    equip.equipment_title = form.cleaned_data['equipment_title']
+                    equip.save()
+
+                else:
+                     if form.cleaned_data.get('equipment_title'):    
+                        equip = Equipment.objects.create(
+                            equipment_type = form.cleaned_data['equipment_type'],
+                            equipment_detail = form.cleaned_data['equipment_detail'],
+                            equipment_title = form.cleaned_data['equipment_title'],
+                            user_id = current_user
+                        )
+        return redirect('/view_eqip/')
     else:
         a = Equipment.objects.filter(user_id = current_user.id)
         data = []
         for i in a:
             a_dict = {
+                'equip_id' : i.id,
                 'equipment_type' : i.equipment_type,
                 'equipment_detail' : i.equipment_detail,
                 'equipment_title' : i.equipment_title
