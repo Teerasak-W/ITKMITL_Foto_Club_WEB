@@ -21,7 +21,7 @@
       <p class="card-text">{{ a.student_id }}</p>
       <p class="card-text">{{ a.user_id.first_name }}</p>
       <p class="card-text">{{ a.user_id.last_name }}</p>
-      {% if user.is_supersuer %}
+      {% if request.user.is_superuser and a.member != True %}
         <a role="button" href="{% url 'add_member' id=a.user_id.id %}" class="btn btn-primary multiShadow text-white">Add Member</a>
       {% endif %}
       </div>
