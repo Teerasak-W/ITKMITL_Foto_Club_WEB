@@ -49,12 +49,12 @@
             <a role="button" href="{% url 'add_contact' id=a.id %}" class="btn btn-primary multiShadow text-white">Add Contact</a>
           {% endif %}
 
-          {% if a.request_status != True %}
+          {% if a.request_status != True and u_request.member == True%}
             <a role="button" href="{% url 'add_staff' id=a.id %}" class="btn btn-primary multiShadow text-white">Assist To Staff</a>
           {% endif %}
 
           {% if request.user.is_superuser or u_request.admin %}
-            {% if a.request_status != True and u_request.member == True %}
+            {% if a.request_status != True %}
               <a role="button" href="{% url 'create_activities' id=a.id %}" class="btn btn-primary multiShadow text-white">Create_activities</a>
             {% endif %}
           {% endif %}

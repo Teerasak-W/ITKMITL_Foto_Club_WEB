@@ -42,23 +42,23 @@
       <a class="navbar-brand mr-auto" href="{% url 'index' %}">
         <img src="{% static '/assets/fotoBrand.png' %}" class="multiShadow" height="40" alt="IT FOTO Club Logo">
       </a>
-      {% if user.is_authenticated %}
-        {% if user.is_active %}
+      {% if request.user.is_authenticated %}
+        {% if request.user.is_active %}
           <a role="button" href="{% url 'request_activities' %}"class="btn btn-primary multiShadow text-white">Request_activities</a>
           <a role="button" href="{% url 'view_request' %}" class="btn btn-primary multiShadow text-white">View_request</a>
         {% endif %}
 
-        {% if user.is_staff %}
+        {% if request.user.is_staff %}
           <a role="button" href="{% url 'view_audience' %}" class="btn btn-primary multiShadow text-white">View audience</a>
           <a role="button" href="{% url 'view_equipment' %}" class="btn btn-primary multiShadow text-white">View Equipment</a>
           <a role="button" href="{% url 'equipment' %}" class="btn btn-primary multiShadow text-white">Add/Edit Equipment</a>
         {% endif %}
 
-        {% if user.is_supersuer %}
+        {% if request.user.is_superuser %}
           <a role="button" href="{% url 'view_suggestion' %}" class="btn btn-primary multiShadow text-white">View_suggestion</a>
         {% endif %}
 
-        {% if not user.is_superuser %}
+        {% if not request.user.is_superuser %}
           <a role="button" href="{% url 'suggestion' %}" class="btn btn-primary multiShadow text-white">Create suggestion</a>
         {% endif %}
         <a role="button" href="{% url 'logout' %}" class="btn btn-primary multiShadow text-white">Log out</a>

@@ -104,6 +104,7 @@ def create_suggestion(request):
             title = request.POST.get('title'),
             detail = request.POST.get('detail')
         )
+        return redirect('/index/')
     context = {'form': suggest}
     return render(request, 'suggestion.html', context)  
 
