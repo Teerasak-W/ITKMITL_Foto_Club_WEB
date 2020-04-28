@@ -143,6 +143,10 @@ def view_request(request):
 
 @user_passes_test(role_check_member)
 def add_staff(request,id):
+    staff_check = Staff.objects.filter(staff_id = request.user.id, activity_id=Request.objects.get(pk = id))
+    for s in staff_check:
+        if request.user == s.staff_id:
+            return redirect('/view_request/')
     staff = Staff.objects.create(
         staff_id = request.user,
         activity_id = Request.objects.get(pk = id),
