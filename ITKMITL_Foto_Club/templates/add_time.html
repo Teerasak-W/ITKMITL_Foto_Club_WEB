@@ -12,6 +12,7 @@
           <div class="card-body">
           <form method="post">
           {% csrf_token %}
+          {% if error %}<p class="text-danger">{{ error }}</p>{% endif %}
           {% for field in form_DT %}
           <p>
               {{ field.label_tag }}<br>
