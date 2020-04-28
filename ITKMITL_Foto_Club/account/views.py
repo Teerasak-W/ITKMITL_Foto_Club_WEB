@@ -52,6 +52,18 @@ def my_logout(request):
     logout(request)
     return redirect('/index/')
 
+def my_passwordRecovery(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        sid = request.POST.get('std')
+        newpw = request.POST.get('pw')
+        u = User.objects.get(username = username)
+        un = User_Account.objects.get(student_id = sid)
+        if u.id == un.user_id_id:
+            u.set_password(newpw)
+            u.save()
+    return render(request, 'passwordRecovery.html')
+
 def views_audience(request):
     p_request = User_Account.objects.all()
     return render(request, 'view_audience.html', context={'p_request':p_request})
