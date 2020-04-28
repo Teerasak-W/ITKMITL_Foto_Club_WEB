@@ -18,7 +18,7 @@
           <img src="{% static '/assets/logoHeader.png' %}" height="60" alt="">
         </div>
         <div class="card-body">
-          <form method="post" enctype="multipart/form-data">
+          <form method="post" enctype="multipart/form-data" data-validate-student_id-url="{% url 'validate_student_id' %}">
             {% csrf_token %}
             {% for field in form %}
               <p>
@@ -39,27 +39,28 @@
     </div>
   </div>
 </div>
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script>
-  function goBack() {
+{% block javascript %}
+  <script>
+    function goBack() {
     window.history.back();
   }
-</script>
-<script>
-  $("#profileImage").click(function (e) {
-    $("#imageUpload").click();
-  });
-
-  function fasterPreview(uploader) {
-    if (uploader.files && uploader.files[0]) {
-      $('#profileImage').attr('src',
-        window.URL.createObjectURL(uploader.files[0]));
-    }
-  }
-
-  $("#imageUpload").change(function () {
-    fasterPreview(this);
-  });
-</script>
-<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    $("#id_student_id").change(function () {
+      console.log( $(this).val() );
+      var student_id = $(this).val();
+      $.ajax({
+        url: '/ajax/validate_student_id/',
+        data: {
+          'student_id': student_id
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("A User with this student id already exists.");
+          }
+        }
+      });
+      console.log( $(this).val() );
+    });
+  </script>
+{% endblock %}
 {% endblock content %}

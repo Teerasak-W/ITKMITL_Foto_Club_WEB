@@ -5,6 +5,7 @@ class User_Account(models.Model):
     user_id = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,)
     student_id = models.CharField(max_length=8)
     picture_path = models.FileField(upload_to='user')
+    pass_code = models.CharField(max_length=5)
     audience = models.BooleanField(default=True)
     member = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
