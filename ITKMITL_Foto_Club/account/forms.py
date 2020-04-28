@@ -33,4 +33,4 @@ class EquipmentForm(ModelForm):
     equipment_title = forms.CharField(max_length=50)
     class Meta:
         model = Equipment
-        fields = '__all__'
+        exclude = ['user_id']

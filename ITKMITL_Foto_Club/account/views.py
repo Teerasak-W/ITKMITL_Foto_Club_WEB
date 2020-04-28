@@ -84,6 +84,7 @@ def view_suggestion(request):
     return render(request, 'view_suggestion.html', context)
 
 def add_Equipment(request):
+    current_user = request.user
     equipment_formset = formset_factory(EquipmentForm, extra=1)
     if request.method == "POST":
         formset = equipment_formset(request.POST)
@@ -93,7 +94,7 @@ def add_Equipment(request):
                     equipment_type = form.cleaned_data['equipment_type'],
                     equipment_detail = form.cleaned_data['equipment_detail'],
                     equipment_title = form.cleaned_data['equipment_title'],
-                    user_id = form.cleaned_data['user_id']
+                    user_id = current_user
             )
     else:
         formset = equipment_formset()

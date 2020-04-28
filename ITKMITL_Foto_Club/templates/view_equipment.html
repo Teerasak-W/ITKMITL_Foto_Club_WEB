@@ -12,7 +12,15 @@
                     <div class="card-body">
                         <div class="container">
                             {% for form in eqip %}
-                            {{ form.equipment_type }}
+                            {% if form.equipment_type == '0' %}
+                                camera
+                            {% elif form.equipment_type == '1'%}
+                                len
+                            {% elif form.equipment_type == '2' %}
+                                lights
+                            {% else %}
+                                other
+                            {% endif %}
                             {{ form.equipment_detail }}
                             {{ form.equipment_title }}
                             <br>
