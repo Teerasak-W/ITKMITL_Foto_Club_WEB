@@ -102,6 +102,6 @@ def add_Equipment(request):
     return render(request, 'equipment.html', context={'formset':formset})
 
 def view_Equipment(request):
-    eqip = Equipment.objects.all()
+    eqip = Equipment.objects.all().order_by('user_id')
     return render(request, 'view_equipment.html', context={'eqip':eqip})
 
