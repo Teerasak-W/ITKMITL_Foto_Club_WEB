@@ -64,9 +64,10 @@ def my_passwordRecovery(request):
         username = request.POST.get('username')
         sid = request.POST.get('std')
         newpw = request.POST.get('pw')
+        passcode = request.POST.get('passcode')
         u = User.objects.get(username = username)
         un = User_Account.objects.get(student_id = sid)
-        if u.id == un.user_id_id:
+        if u.id == un.user_id_id and un.pass_code == passcode:
             u.set_password(newpw)
             u.save()
             return redirect('/sign_in/')
