@@ -48,6 +48,7 @@ def my_sign_up(request):
                 user_id = request.user,
                 student_id = request.POST.get('student_id'),
                 picture_path = request.FILES['picture'],
+                pass_code = request.POST.get('pass_code'),
             )
             return redirect('/index/')
     else:
@@ -68,6 +69,7 @@ def my_passwordRecovery(request):
         if u.id == un.user_id_id:
             u.set_password(newpw)
             u.save()
+            return redirect('/sign_in/')
     return render(request, 'passwordRecovery.html')
 
 @login_required(login_url='/sign_in/')

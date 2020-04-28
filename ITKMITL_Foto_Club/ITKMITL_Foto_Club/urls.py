@@ -27,7 +27,6 @@ urlpatterns = [
     path('', actv.index),
     path('index/', actv.index, name='index'),
 
-
     path('activities/<int:id>/', actv.view_activities, name='activities'),
     path('activities/album/<int:at_id>/<int:id>/', actv.view_album, name='view_album'),
     path('create_activities/<int:id>/', actv.create_activities, name='create_activities'),
@@ -41,6 +40,7 @@ urlpatterns = [
     path('remove_picture/<int:at_id>/<int:id>/<int:pic_id>/', actv.remove_picture, name='remove_picture'),
 
     path('ajax/validate_request_title/', actv.validate_request_title, name='validate_request_title'),
+    path('ajax/validate_student_id/', actv.validate_student_id, name='validate_student_id'),
 
     path('sign_in/', accv.my_sign_in, name='sign_in'),
     path('logout/', accv.my_logout, name='logout'),

@@ -190,10 +190,16 @@ def remove_picture(request,at_id,id,pic_id):
     picture.delete()
     return redirect('/activities/album/%d/%d'%(at_id,id))
 
-@login_required(login_url='/sign_in/')
 def validate_request_title(request):
-    username = request.GET.get('request_title', None)
+    req = request.GET.get('request_title', None)
     data = {
-        'is_taken': Request.objects.filter(request_title=username).exists()
+        'is_taken': Request.objects.filter(request_title=req).exists()
+    }
+    return JsonResponse(data)
+
+def validate_student_id(request):
+    sid = request.GET.get('student_id', None)
+    data = {
+        'is_taken': User_Account.objects.filter(student_id=sid).exists()
     }
     return JsonResponse(data)
