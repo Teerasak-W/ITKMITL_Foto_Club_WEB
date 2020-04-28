@@ -30,8 +30,9 @@ type_for = (
 
 class EquipmentForm(ModelForm):
     equipment_type = forms.ChoiceField(choices=type_for)
-    equipment_detail = forms.CharField()
-    equipment_title = forms.CharField(max_length=50)
+    equipment_detail = forms.CharField(required=False)
+    equipment_title = forms.CharField(max_length=50, required=False)
+    del_flag = forms.BooleanField(initial=False, required=False)
     class Meta:
         model = Equipment
         exclude = ['user_id']

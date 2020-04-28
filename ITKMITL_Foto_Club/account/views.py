@@ -1,14 +1,19 @@
-from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
-from django.core.files.storage import FileSystemStorage
+
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from account.forms import Sign_Up, suggestionForm, EquipmentForm
-from activities import views
-from .models import User_Account, suggestion, Equipment
+from django.core.files.storage import FileSystemStorage
 from django.forms import formset_factory
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.views.generic import TemplateView
+
+from account.forms import EquipmentForm, Sign_Up, suggestionForm
+from activities import views
+
+from .models import Equipment, User_Account, suggestion
+
 
 # Create your views here.
 def role_check_super(user):
@@ -111,19 +116,33 @@ def view_suggestion(request):
 @user_passes_test(role_check_member)
 def add_Equipment(request):
     current_user = request.user
-    equipment_formset = formset_factory(EquipmentForm, extra=1)
+    equipment_formset = formset_factory(EquipmentForm)
     if request.method == "POST":
         formset = equipment_formset(request.POST)
         if formset.is_valid():
             for form in formset:
-                equip = Equipment.objects.create(
-                    equipment_type = form.cleaned_data['equipment_type'],
-                    equipment_detail = form.cleaned_data['equipment_detail'],
-                    equipment_title = form.cleaned_data['equipment_title'],
-                    user_id = current_user
+                if form.cleaned_data.get('del_flag'):
+                    equip = Equipment.objects.get(pk =form.cleaned_data['id'])
+                    equip.delete()
+                    continue
+                else:    
+                    equip = Equipment.objects.create(
+                        equipment_type = form.cleaned_data['equipment_type'],
+                        equipment_detail = form.cleaned_data['equipment_detail'],
+                        equipment_title = form.cleaned_data['equipment_title'],
+                        user_id = current_user
             )
     else:
-        formset = equipment_formset()
+        a = Equipment.objects.filter(user_id = current_user.id)
+        data = []
+        for i in a:
+            a_dict = {
+                'equipment_type' : i.equipment_type,
+                'equipment_detail' : i.equipment_detail,
+                'equipment_title' : i.equipment_title
+            }
+            data.append(a_dict)
+        formset = equipment_formset(initial = data)
         
     return render(request, 'equipment.html', context={'formset':formset})
 
@@ -131,4 +150,3 @@ def add_Equipment(request):
 def view_Equipment(request):
     eqip = Equipment.objects.all().order_by('user_id')
     return render(request, 'view_equipment.html', context={'eqip':eqip})
-
