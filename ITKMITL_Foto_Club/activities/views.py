@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.views.generic import TemplateView
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
@@ -13,6 +13,11 @@ from .models import Activities, Date_time, Contact, Staff, Album, Picture
 from .forms import Request_Activities, Request_Datetime, Request_Contact
 
 # Create your views here.
+def role_check_super(user):
+    return user.is_superuser
+
+def role_check_member(user):
+    return user.is_staff
 
 def index(request):
     if request.user.is_authenticated:
@@ -33,7 +38,6 @@ def view_activities(request,id):
             break
         else:
             status = False
-    print(status)
     return render(request, 'activities.html', context={
         'activities' : activities,
         'id': id,
@@ -41,7 +45,8 @@ def view_activities(request,id):
         'album':album,
         'status':status,
     })
-    
+
+@user_passes_test(role_check_super)
 def create_activities(request,id):
     v_request = Request.objects.get(pk = id)
     c_request = Request_contact.objects.filter(ar_id = id)
@@ -69,6 +74,7 @@ def create_activities(request,id):
     if activities:
         return redirect('/index/')
 
+@login_required(login_url='/sign_in/')
 def request_activities(request):
     if request.method == 'POST':
         form_RA = Request_Activities(request.POST)
@@ -88,6 +94,7 @@ def request_activities(request):
         form_RA = Request_Activities()
     return render(request, 'request_activities.html', context={'form_RA': form_RA,})
 
+@login_required(login_url='/sign_in/')
 def add_contact(request,id):
     if request.method == 'POST':
         form_CT = Request_Contact(request.POST)
@@ -103,6 +110,7 @@ def add_contact(request,id):
         form_CT = Request_Contact()
     return render(request, 'add_contact.html', {'form_CT':form_CT})
 
+@login_required(login_url='/sign_in/')
 def add_time(request,id):
     if request.method == 'POST':
         form_DT = Request_Datetime(request.POST)
@@ -118,6 +126,7 @@ def add_time(request,id):
         form_DT = Request_Datetime()
     return render(request, 'add_time.html', {'form_DT':form_DT})
 
+@login_required(login_url='/sign_in/')
 def view_request(request):
     v_request = Request.objects.all()
     u_request = User_Account.objects.get(user_id = request.user.id)
@@ -132,13 +141,19 @@ def view_request(request):
         's_request':s_request,
         })
 
+@user_passes_test(role_check_member)
 def add_staff(request,id):
+    staff_check = Staff.objects.filter(staff_id = request.user.id, activity_id=Request.objects.get(pk = id))
+    for s in staff_check:
+        if request.user == s.staff_id:
+            return redirect('/view_request/')
     staff = Staff.objects.create(
         staff_id = request.user,
         activity_id = Request.objects.get(pk = id),
     )
     return redirect('/view_request/')
-    
+
+@user_passes_test(role_check_member)
 def add_album(request,id):
     album = Album.objects.create(
         activity_id = Activities.objects.get(pk = id),
@@ -159,6 +174,7 @@ def view_album(request,at_id,id):
     print(status)
     return render(request, 'view_album.html', context={'album':album,'pic':pic,'staff':staff, 'status':status})
 
+@user_passes_test(role_check_member)
 def add_picture(request,at_id,id):
     album_name = request.FILES.getlist('picture_name')
     for i in album_name:
@@ -168,11 +184,13 @@ def add_picture(request,at_id,id):
         )
     return redirect('/activities/album/%d/%d'%(at_id,id))
 
+@user_passes_test(role_check_member)
 def remove_picture(request,at_id,id,pic_id):
     picture = Picture.objects.get(pk=pic_id)
     picture.delete()
     return redirect('/activities/album/%d/%d'%(at_id,id))
 
+@login_required(login_url='/sign_in/')
 def validate_request_title(request):
     username = request.GET.get('request_title', None)
     data = {

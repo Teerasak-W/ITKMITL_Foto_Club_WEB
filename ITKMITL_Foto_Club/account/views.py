@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from account.forms import Sign_Up, suggestionForm, EquipmentForm
@@ -11,6 +11,12 @@ from .models import User_Account, suggestion, Equipment
 from django.forms import formset_factory
 
 # Create your views here.
+def role_check_super(user):
+    return user.is_superuser
+    
+def role_check_member(user):
+    return user.is_staff
+
 def my_sign_in(request):
     context = {}
     if request.method == 'POST':
@@ -64,10 +70,12 @@ def my_passwordRecovery(request):
             u.save()
     return render(request, 'passwordRecovery.html')
 
+@login_required(login_url='/sign_in/')
 def views_audience(request):
     p_request = User_Account.objects.all()
     return render(request, 'view_audience.html', context={'p_request':p_request})
 
+@user_passes_test(role_check_super)
 def add_member(requset,id):
     add_to = User_Account.objects.get(pk=id)
     add_to.member = True
@@ -79,6 +87,7 @@ def add_member(requset,id):
     if add_to.member == True:
         return redirect('/view_audience/')
 
+@login_required(login_url='/sign_in/')
 def create_suggestion(request):
     suggest = suggestionForm(request.POST)
     if request.method == "POST":
@@ -90,11 +99,13 @@ def create_suggestion(request):
     context = {'form': suggest}
     return render(request, 'suggestion.html', context)  
 
+@user_passes_test(role_check_super)
 def view_suggestion(request):
     suggest = suggestion.objects.all()
     context = {'suggest' : suggest}
     return render(request, 'view_suggestion.html', context)
 
+@user_passes_test(role_check_member)
 def add_Equipment(request):
     current_user = request.user
     equipment_formset = formset_factory(EquipmentForm, extra=1)
@@ -113,6 +124,7 @@ def add_Equipment(request):
         
     return render(request, 'equipment.html', context={'formset':formset})
 
+@user_passes_test(role_check_member)
 def view_Equipment(request):
     eqip = Equipment.objects.all().order_by('user_id')
     return render(request, 'view_equipment.html', context={'eqip':eqip})

@@ -4,7 +4,7 @@
     <div class="center">
       <div class="row px-3">
       {% for a in v_request %}
-      {% if user.id == a.user_id.id or u_request.admin %}
+      {% if user.id == a.user_id.id or u_request.admin or u_request.member %}
       <div class="col-md-3 my-2">
       <div class="card multiShadow">
           <div class="text-center">
@@ -48,9 +48,11 @@
             <a role="button" href="{% url 'add_time' id=a.id %}" class="btn btn-primary multiShadow text-white">Add Time</a>
             <a role="button" href="{% url 'add_contact' id=a.id %}" class="btn btn-primary multiShadow text-white">Add Contact</a>
           {% endif %}
-          {% if u_request.member and a.request_status != True %}
+
+          {% if a.request_status != True %}
             <a role="button" href="{% url 'add_staff' id=a.id %}" class="btn btn-primary multiShadow text-white">Assist To Staff</a>
           {% endif %}
+
           {% if request.user.is_superuser or u_request.admin %}
             {% if a.request_status != True %}
               <a role="button" href="{% url 'create_activities' id=a.id %}" class="btn btn-primary multiShadow text-white">Create_activities</a>
