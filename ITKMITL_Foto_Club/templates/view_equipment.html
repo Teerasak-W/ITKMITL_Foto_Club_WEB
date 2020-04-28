@@ -10,16 +10,22 @@
                         <img src="{% static '/assets/logoHeader.png' %}" height="60" alt="">
                     </div>
                     <div class="card-body">
-                        <div class="container">
+                        <table class="table">
+                            <thead>
+                                <th scope="col">User</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Detail</th>
+                            </thead>
                             {% for form in eqip %}
-                            <div class="row">
-                                <div class="col-sm">
+                            <tr>
+                                <td>
                                     {{ form.user_id }}
-                                </div>
-                                <div class="col-sm">
+                                </td>
+                                <td>
                                 {{ form.equipment_title }}
-                                </div>
-                                <div class="col-sm">
+                                </td>
+                                <td>
                                 {% if form.equipment_type == '0' %}
                                     camera
                                 {% elif form.equipment_type == '1' %}
@@ -29,17 +35,17 @@
                                 {% elif form.equipment_type == '3' %}
                                     other
                                 {% endif %}
-                                </div>
-                                <div class="col-sm">
+                                </td>
+                                <td>
                                 {{ form.equipment_detail }}
-                                </div>
-                            </div>
+                                </td>
+                            </tr>
                             {% endfor %}
-                        </div>
+                        </tabl>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock content %}
