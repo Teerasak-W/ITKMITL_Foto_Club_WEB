@@ -32,8 +32,8 @@ type_for = (
 
 class EquipmentForm(ModelForm): 
     equipment_type = forms.ChoiceField(choices=type_for)
-    equipment_detail = forms.CharField(required=False)
     equipment_title = forms.CharField(max_length=50, required=False)
+    equipment_detail = forms.CharField(required=False)
     del_flag = forms.BooleanField(initial=False, required=False)
     equip_id = forms.CharField(widget = forms.HiddenInput, required=False)
     class Meta:

@@ -141,7 +141,7 @@ def add_Equipment(request):
                             equipment_title = form.cleaned_data['equipment_title'],
                             user_id = current_user
                         )
-        return redirect('/view_eqip/')
+        return redirect('/view_equipment/')
     else:
         a = Equipment.objects.filter(user_id = current_user.id)
         data = []

@@ -13,8 +13,8 @@ class User_Account(models.Model):
 class Equipment(models.Model):
     type_for = (('0', 'camera'),('1', 'lens'),('2', 'light'),('3', 'other'))
     equipment_type = models.CharField(max_length=1, choices=type_for)
-    equipment_detail = models.TextField()
     equipment_title = models.CharField(max_length=50)
+    equipment_detail = models.TextField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Request(models.Model):
