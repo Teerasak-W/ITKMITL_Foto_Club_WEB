@@ -104,6 +104,7 @@ def create_suggestion(request):
             title = request.POST.get('title'),
             detail = request.POST.get('detail')
         )
+        return redirect('/index/')
     context = {'form': suggest}
     return render(request, 'suggestion.html', context)  
 
@@ -116,7 +117,7 @@ def view_suggestion(request):
 @user_passes_test(role_check_member)
 def add_Equipment(request):
     current_user = request.user
-    equipment_formset = formset_factory(EquipmentForm)
+    equipment_formset = formset_factory(EquipmentForm, extra = 2)
     if request.method == "POST":
         formset = equipment_formset(request.POST)
         if formset.is_valid():
