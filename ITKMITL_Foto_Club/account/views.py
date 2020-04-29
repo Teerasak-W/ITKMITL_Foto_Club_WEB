@@ -1,5 +1,5 @@
 
-
+from django.contrib import messages 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
@@ -70,12 +70,21 @@ def my_passwordRecovery(request):
         sid = request.POST.get('std')
         newpw = request.POST.get('pw')
         passcode = request.POST.get('passcode')
-        u = User.objects.get(username = username)
-        un = User_Account.objects.get(student_id = sid)
-        if u.id == un.user_id_id and un.pass_code == passcode:
-            u.set_password(newpw)
-            u.save()
-            return redirect('/sign_in/')
+
+        if User.objects.filter(username = username) and User_Account.objects.filter(student_id = sid):
+            u = User.objects.get(username = username)
+            un = User_Account.objects.get(student_id = sid)
+            if u.id == un.user_id_id and un.pass_code == passcode:
+                u.set_password(newpw)
+                u.save()
+
+                return redirect('/sign_in/')
+
+            else:
+                messages.warning(request, 'passcode incorrect')
+        else:
+            messages.warning(request, 'username or student id incorrect')
+            
     return render(request, 'passwordRecovery.html')
 
 @login_required(login_url='/sign_in/')
