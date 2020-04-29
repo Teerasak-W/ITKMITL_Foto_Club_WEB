@@ -12,7 +12,7 @@ class Sign_Up(UserCreationForm):
     email = forms.EmailField(max_length=254,required=True, help_text='Required. Inform a valid email address.')
     student_id = forms.CharField(max_length=8, required=True, help_text='Required.')
     pass_code = forms.CharField(max_length=5,required=True, help_text='Required 5 digit.')
-    picture = forms.FileField(required=False)
+    picture = forms.ImageField(required=False)
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name','student_id', 'email', 'password1', 'password2', 'pass_code', 'picture')

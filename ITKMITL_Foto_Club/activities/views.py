@@ -195,9 +195,12 @@ def remove_picture(request,at_id,id,pic_id):
 
 def validate_request_title(request):
     req = request.GET.get('request_title', None)
+    print(req)
+    print(Request.objects.filter(request_title=req))
     data = {
         'is_taken': Request.objects.filter(request_title=req).exists()
     }
+    print(data)
     return JsonResponse(data)
 
 def validate_student_id(request):
