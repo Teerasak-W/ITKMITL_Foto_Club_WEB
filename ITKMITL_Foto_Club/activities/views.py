@@ -165,8 +165,9 @@ def add_album(request,id):
     return redirect('/activities/%d/'%id)
 
 def view_album(request,at_id,id):
+    rq_id = Activities.objects.get(id = at_id)
     album = Album.objects.filter(id=id)
-    staff = Staff.objects.filter(activity_id = at_id)
+    staff = Staff.objects.filter(activity_id = rq_id.rq_id)
     pic = Picture.objects.filter(album_id=id)
     for a in staff:
         status = (a.staff_id == request.user)
