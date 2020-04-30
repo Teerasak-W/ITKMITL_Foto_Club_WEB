@@ -32,12 +32,15 @@ def view_activities(request,id):
     activities = Activities.objects.get(pk = id)
     staff = Staff.objects.filter(activity_id = activities.rq_id)
     album = Album.objects.filter(activity_id = activities.id)
-    for a in staff:
-        status = (a.staff_id == request.user)
-        if status:
-            break
-        else:
-            status = False
+    if staff:
+        for a in staff:
+            status = (a.staff_id == request.user)
+            if status:
+                break
+            else:
+                status = False
+    else:
+        status = False
     return render(request, 'activities.html', context={
         'activities' : activities,
         'id': id,
@@ -169,13 +172,15 @@ def view_album(request,at_id,id):
     album = Album.objects.filter(id=id)
     staff = Staff.objects.filter(activity_id = rq_id.rq_id)
     pic = Picture.objects.filter(album_id=id)
-    for a in staff:
-        status = (a.staff_id == request.user)
-        if status:
-            break
-        else:
-            status = False
-    print(status)
+    if staff:
+        for a in staff:
+            status = (a.staff_id == request.user)
+            if status:
+                break
+            else:
+                status = False
+    else:
+        status = False
     return render(request, 'view_album.html', context={'album':album,'pic':pic,'staff':staff, 'status':status})
 
 @user_passes_test(role_check_member)
